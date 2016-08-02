@@ -11,7 +11,11 @@
             <label>Nombre del Producto: </label>
             <input name="nombre_producto" type="text" id="nombre_producto" />
             <label>Nivel de Ventas: </label>
-            <input name="nivel_ventas" type="text" id="nivel_ventas" />
+            <select name="nivel_ventas" id="nivel_ventas">
+                <option selected="selected">Seleccionar</option>
+                <option>Altas</option>
+                <option>Bajas</option>
+            </select>
             <label>Selecciona Foto: </label>
             <input name="userfile" type="file" />
             <label>Stoke: </label>

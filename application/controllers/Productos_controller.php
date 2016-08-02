@@ -100,6 +100,7 @@ class Productos_controller extends CI_Controller
             $insertar = $this->Productos_model->insertar_producto($data);
             if ($insertar == true)
             {
+                $codigo_producto = $this->Productos_model->obtener_codigo_producto();
                 $this->session->set_flashdata('correcto','Se agregó su producto exitosamente');
                 redirect('Caracteristicas_controller/pagina_agregar_producto_caracteristicas/'.$codigo_producto,'refresh');
                 //$this->pagina_agregar_producto_caracteristicas($codigo_producto);

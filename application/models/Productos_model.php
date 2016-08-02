@@ -23,6 +23,11 @@ class Productos_model extends CI_Model {
         return $this->db->insert('producto',$data);
     }
     
+    function obtener_codigo_producto()
+    {
+        return $this->db->insert_id();
+    }
+    
     function seleccionar_productos_all()
     {
         $this->db->join('categoria','producto.categoria_id = categoria.id_categoria');
