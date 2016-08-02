@@ -81,7 +81,7 @@ class Productos_controller extends CI_Controller
             $subcategoria = null;
         }
         
-        if(($codigo_producto != "") &&($nombre_producto != "")&&($nivel_ventas != "")&&($categoria != NULL)&&($estado != NULL)&&($stoke != NULL)&&($foto != "") && ($peso !=""))
+        if(($nombre_producto != "")&&($nivel_ventas != "")&&($categoria != NULL)&&($estado != NULL)&&($stoke != NULL)&&($foto != "") && ($peso !=""))
         {
             $data = array('nombre_producto'=>$nombre_producto,
                         'nivel_ventas'=>$nivel_ventas = $nivel_ventas,

@@ -28,7 +28,7 @@
                 <option>Normal</option>
             </select>
             <label>Categoria: </label>
-            <select name="categoria" id="categoria" onchange="//return Obtener_subcategoria();">
+            <select name="categoria" id="categoria" onchange="return Obtener_subcategoria();">
                 <option selected="selected">Seleccionar</option>
                 <?php foreach ($categoria as $cat): ?>
                     <option value="<?php echo $cat->id_categoria ?>">
