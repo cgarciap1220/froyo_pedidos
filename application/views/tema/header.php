@@ -191,10 +191,10 @@
                                 <a href="#"><i class="md  md-person"></i>User</a>
                                 <ul class="submenu">
                                     <li class="active">
-                                        <a href="index.html">Add</a>
+                                        <a href="<?php echo base_url(); ?>Usuario_controller/vista_agregar_usuario">Add</a>
                                     </li>
                                     <li class="active">
-                                        <a href="index.html">List</a>
+                                        <a href="<?php echo base_url(); ?>Usuario_controller/listar_usuarios">List</a>
                                     </li>
 
                                 </ul>
@@ -263,7 +263,7 @@
                             </li>
                         
                             <li class="">
-                                <a href="#"><i class="md md-account-child"></i>Reports</a>
+                                <a href="#"><i class="md md-description"></i>Reports</a>
                             </li>
                             
                         </ul>
