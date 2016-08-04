@@ -226,8 +226,8 @@
                         <li class="has-submenu">
                             <a href="#"><i class="md  md-local-shipping"></i>Truck</a>
                              <ul class="submenu">
-                                <li><a href="ui-buttons.html">Add</a></li>
-                                <li><a href="ui-loading-buttons.html">List</a></li>
+                                <li><a href="<?php echo base_url();?>Camion_controller/vista_agregar_camion">Add</a></li>
+                                <li><a href="<?php echo base_url();?>Camion_controller/listar_camiones">List</a></li>
                             </ul>         
                         </li>
                         <li class="has-submenu">
