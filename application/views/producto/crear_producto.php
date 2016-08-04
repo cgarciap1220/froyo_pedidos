@@ -1,23 +1,24 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <script>
-            var url = <?php echo json_encode(base_url(), JSON_HEX_TAG); ?>;
-        </script>
     </head>
     <body>
-        <form id="form" name="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() ?>productos_controller/agregar_producto">
+        <form id="form" name="form" method="post" action="<?php echo base_url() ?>productos_controller/agregar_producto">
+            <label>Codigo del Producto: </label>
+            <input name="codigo_producto" type="text" id="codigo_producto" />
             <label>Nombre del Producto: </label>
             <input name="nombre_producto" type="text" id="nombre_producto" />
             <label>Nivel de Ventas: </label>
-            <select name="nivel_ventas" id="nivel_ventas">
-                <option selected="selected">Seleccionar</option>
-                <option>Altas</option>
-                <option>Bajas</option>
-            </select>
+            <input name="nivel_ventas" type="text" id="nivel_ventas" />
             <label>Selecciona Foto: </label>
-            <input name="userfile" type="file" />
+            <input name="foto" type="file" id="foto" />
             <label>Stoke: </label>
             <select name="stoke" id="stoke">
                 <option selected="selected">Seleccionar</option>
@@ -32,34 +33,19 @@
                 <option>Normal</option>
             </select>
             <label>Categoria: </label>
-            <select name="categoria" id="categoria" onchange="return Obtener_subcategoria();">
+            <select name="categoria" id="categoria">
                 <option selected="selected">Seleccionar</option>
-                <?php foreach ($categoria as $cat): ?>
-                    <option value="<?php echo $cat->id_categoria ?>">
-                        <?php echo $cat->categoria ?>
-                    </option>
-                <?php endforeach; ?>
+                
             </select>
             <label>Subcategoria: </label>
-            <div id="subcategoria">
-                <select name="subcategoria" id="subcategoria" class="form-control" >
-                    <option selected="selected">Seleccionar</option>
-                    <?php foreach ($subcategoria as $sub): ?>
-                        <option value="<?php echo $sub->id_subcategoria ?>">
-                            <?php echo $sub->subcategoria ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+            <select name="subacategoria" id="subacategoria">
+                <option selected="selected">Seleccionar</option>
+            </select>
             <label>Peso: </label>
             <input name="peso" type="text" id="peso" />
             <label>Descripcion: </label>
             <textarea name="descripcion" id="descripcion"></textarea>
-            <input type="submit" name="agregar" id="agregar" value="Agregar Producto">
-
+            <button type="submit">Agregar</button>
         </form>
     </body>
-
-    <script src="<?php echo base_url(); ?>assets/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/miscripts.js"></script>
 </html>

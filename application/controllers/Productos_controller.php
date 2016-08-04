@@ -163,6 +163,10 @@ class Productos_controller extends CI_Controller
         $descripcion = $this->input->post('descripcion');
         //$imagen = $this->input->post('userfile');
         $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
+        if($nivel_ventas == "Seleccionar")
+        {
+            $nivel_ventas = null;
+        }
         if($estado == "Seleccionar")
         {
             $estado = null;
@@ -180,7 +184,7 @@ class Productos_controller extends CI_Controller
             $subcategoria = null;
         }
         //$foto = 'assets/images/'.$nombre_modificado;
-         if(($codigo_producto != "") &&($nombre_producto != "")&&($nivel_ventas != "")&&($categoria != NULL)&&($estado != NULL)&&($stoke != NULL) && ($peso !=""))
+         if(($codigo_producto != "") &&($nombre_producto != "")&&($nivel_ventas != NULL)&&($categoria != NULL)&&($estado != NULL)&&($stoke != NULL) && ($peso !=""))
         {
             if($nombre_imagen != "")
             {

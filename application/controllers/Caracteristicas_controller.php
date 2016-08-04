@@ -31,8 +31,7 @@ class Caracteristicas_controller extends CI_Controller{
     
     function agregar_producto_caracteristicas()
     {
-        $this->load->helper('text_helper');
-        //$si = $this->uri->segment('3');
+       //$si = $this->uri->segment('3');
         $codigo_producto = $this->input->post('codigo_producto');
         $codigo_especifico = $this->input->post('codigo_especifico');
         $ancho = $this->input->post('ancho');
@@ -43,7 +42,6 @@ class Caracteristicas_controller extends CI_Controller{
         $precio = $this->input->post('precio');
         $color = $this->input->post('color');
         $sabor = $this->input->post('sabor');
-        $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
         
         if($existencia == "Seleccionar")
         {
@@ -72,6 +70,9 @@ class Caracteristicas_controller extends CI_Controller{
             if($insert_pres)
             {
                 $id_present = $this->Caracteriscticas_model->obtener_id_presentacion();
+                $this->load->helper('text_helper');
+              
+                $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
                 $nombre_modificado = str_replace('jpg','',$nombre_imagen);
                 $nombre_modificado .= '.jpg';
                 $config['max_size'] = 6000;
@@ -89,18 +90,20 @@ class Caracteristicas_controller extends CI_Controller{
                 if(!$this->image_lib->resize())
                 {
                     echo $this->image_lib->display_errors();
-                }
+                }    
+                
                 $foto = 'uploads/'.$nombre_modificado;
                 $caract = array(
                         'producto_codigo'=>$codigo_producto,
                         'color_id'=>$color,
                         'sabor_id'=>$sabor,
+                        'presentacion_id'=>$id_present,
                         'existencia'=>$existencia,
                         'foto'=>$foto,
                         'codigo_especifico'=>$codigo_especifico,
                     );
-                $insert_caract = $this->Caracteristicas_model->insertar_caracteristicas($caract);
-                echo 'hola';
+                $insert_caract = $this->Caracteriscticas_model->insertar_caracteristicas($caract);
+                
             }
         }
         
@@ -112,7 +115,7 @@ class Caracteristicas_controller extends CI_Controller{
         }
         else
         {*/
-            redirect('caracteristicas_controller/pagina_agregar_producto_caracteristicas/'.$codigo_producto,'refresh');
+           // redirect('caracteristicas_controller/pagina_agregar_producto_caracteristicas/'.$codigo_producto,'refresh');
         //}
        
     }
