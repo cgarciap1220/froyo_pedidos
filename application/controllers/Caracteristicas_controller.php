@@ -26,7 +26,10 @@ class Caracteristicas_controller extends CI_Controller{
         $data['color'] = $this->Color_model->seleccionar_color();
         $data['sabor'] = $this->Sabor_model->seleccionar_sabor();
         $data['codigoproducto'] = $codigoproducto;
+        $info['titulo'] = "Add Product Features";
+        $this->load->view('tema/header',$info);
         $this->load->view('producto/producto_caracteristicas',$data);
+        $this->load->view('tema/footer');
     }
     
     function agregar_producto_caracteristicas()

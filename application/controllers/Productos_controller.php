@@ -25,7 +25,11 @@ class Productos_controller extends CI_Controller
     {
         $data['categoria'] = $this->Categoria_model->seleccionar_categoria();
         $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria();
+        $info['titulo'] = "Add Product";
+        $this->load->view('tema/header',$info);
         $this->load->view('producto/crear_producto',$data);
+        $this->load->view('tema/footer');
+        
     }
     
     function agregar_producto()
@@ -133,9 +137,11 @@ class Productos_controller extends CI_Controller
             $data['prod_id'] = $cod_prod;
             $data['categoria'] = $this->Categoria_model->seleccionar_categoria();
             $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria();
-            /*$this->load->view('theme/front_end/header',$info);
-            $this->load->view('theme/front_end/footer');*/
+            $info['titulo'] = "Update Product";
+            $this->load->view('tema/header',$info);
             $this->load->view('producto/actualizar_producto', $data);
+            $this->load->view('tema/footer');
+           
        /* }
         else 
         {
@@ -252,7 +258,7 @@ class Productos_controller extends CI_Controller
         }
     }
     //function obtener_productos() 
-     public function index()
+     public function mostrar_productos()
     {   
         $productos = $this->Productos_model->seleccionar_productos_all();
         
@@ -260,17 +266,20 @@ class Productos_controller extends CI_Controller
             {
                 $data['valor'] = true;
                 $data['productos'] = $productos;
-                /*$this->load->view('theme/front_end/header',$info);
-                $this->load->view('theme/front_end/footer');*/
+                $info['titulo'] = "Show Product";
+                $this->load->view('tema/header',$info);
                 $this->load->view('producto/listar_productos', $data);
+                $this->load->view('tema/footer');
             }
             else
             {   
                 $data['valor'] = $productos;
                 $data['productos']="No hay información que mostrar";
-                /*$this->session->set_flashdata('error', 'No hay información que mostrar');
-                 redirect('productos_controller/index/', 'refresh');*/
-                        $this->load->view('producto/listar_productos', $data);
+                $info['titulo'] = "Show Product";
+                $this->load->view('tema/header',$info);
+                $this->load->view('producto/listar_productos', $data);
+                $this->load->view('tema/footer');
+                        
             }
             
         /*}

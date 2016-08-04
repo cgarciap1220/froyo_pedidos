@@ -11,6 +11,35 @@
  *
  * @author Cindy
  */
-class Chofer_controller {
-    //put your code here
+class Chofer_controller extends CI_Controller
+{
+   public function __construct() 
+    {
+        parent::__construct();        
+    }
+    
+    function listar_chofer()
+    { 
+        $info['titulo'] = "Show Pailot";
+        $this->load->view('tema/header',$info);
+        $this->load->view('chofer/listar_chofer');
+        $this->load->view('tema/footer');
+    }
+    
+    function vista_agregar_chofer()
+    { 
+        $info['titulo'] = "Add Pailot";
+        $this->load->view('tema/header',$info);
+        $this->load->view('chofer/insertar_chofer');
+        $this->load->view('tema/footer');
+    }
+    
+    function vista_modificar_chofer()
+    { 
+        $info['titulo'] = "Update Pailot";
+        $this->load->view('tema/header',$info);
+        $this->load->view('chofer/modificar_chofer');
+        $this->load->view('tema/footer');
+    }
+    
 }
