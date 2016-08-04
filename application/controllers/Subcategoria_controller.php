@@ -11,19 +11,19 @@
  *
  * @author Cindy
  */
-class Subsubcategoria_controller extends CI_Controller 
+class Subcategoria_controller extends CI_Controller 
 {
     public function __construct() 
     {
         parent::__construct();
-        $this->load->model('Subsubcategoria_model');
+        $this->load->model('Subcategoria_model');
     }
     
     function obtener_subsubcategoria_subcategoria()
     {
         $id = $this->uri->segment('3');
-        $data['subsubcategoria'] = $this->Subsubcategoria_model->seleccionar_subsubcategoria_subcategoria($id);
-        $this->load->view('otros/subsubcategoria', $data);
+        $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria_subcategoria($id);
+        $this->load->view('otros/subcategoria', $data);
     }
     
     function listar_subcategorias()

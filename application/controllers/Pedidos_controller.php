@@ -22,7 +22,7 @@ class Pedidos_controller extends CI_Controller
     { 
         $info['titulo'] = "Show Order";
         $this->load->view('tema/header',$info);
-        $this->load->view('pedido/listar_pedido');
+        $this->load->view('pedidos/listar_pedido');
         $this->load->view('tema/footer');
     }
     
@@ -30,7 +30,7 @@ class Pedidos_controller extends CI_Controller
     { 
         $info['titulo'] = "Show Order Pending";
         $this->load->view('tema/header',$info);
-        $this->load->view('pedido/listar_pedido_pendientes');
+        $this->load->view('pedidos/listar_pedido_pendientes');
         $this->load->view('tema/footer');
     }
     
@@ -38,7 +38,7 @@ class Pedidos_controller extends CI_Controller
     { 
         $info['titulo'] = "Show Order Sent";
         $this->load->view('tema/header',$info);
-        $this->load->view('pedido/listar_pedido_enviados');
+        $this->load->view('pedidos/listar_pedido_enviados');
         $this->load->view('tema/footer');
     }
     
@@ -46,7 +46,7 @@ class Pedidos_controller extends CI_Controller
     { 
         $info['titulo'] = "Add Order";
         $this->load->view('tema/header',$info);
-        $this->load->view('pedido/insertar_pedido');
+        $this->load->view('pedidos/insertar_pedido');
         $this->load->view('tema/footer');
     }
     
@@ -54,7 +54,7 @@ class Pedidos_controller extends CI_Controller
     { 
         $info['titulo'] = "Update Order";
         $this->load->view('tema/header',$info);
-        $this->load->view('pedido/modificar_pedido');
+        $this->load->view('pedidos/modificar_pedido');
         $this->load->view('tema/footer');
     }
     

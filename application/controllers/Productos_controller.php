@@ -21,7 +21,42 @@ class Productos_controller extends CI_Controller
         $this->load->model('Subcategoria_model');
         
     }
-    public function pagina_agregar_producto()
+    
+    //function obtener_productos() 
+     public function mostrar_productos()
+    {   
+        $productos = $this->Productos_model->seleccionar_productos_all();
+        
+            if($productos != False)
+            {
+                $data['valor'] = true;
+                $data['productos'] = $productos;
+                $info['titulo'] = "Show Product";
+                $this->load->view('tema/header',$info);
+                $this->load->view('producto/listar_productos', $data);
+                $this->load->view('tema/footer');
+            }
+            else
+            {   
+                $data['valor'] = $productos;
+                $data['productos']="No hay información que mostrar";
+                $info['titulo'] = "Show Product";
+                $this->load->view('tema/header',$info);
+                $this->load->view('producto/listar_productos', $data);
+                $this->load->view('tema/footer');
+                        
+            }
+            
+        /*}
+        else 
+        {
+            $this->session->set_flashdata('error', 'Tiene que iniciar su sesión para acceder a esta página');
+            redirect('inicio_controller/index/', 'refresh');
+            //$this->redi();
+        }*/
+    }
+    
+    public function vista_agregar_producto()
     {
         $data['categoria'] = $this->Categoria_model->seleccionar_categoria();
         $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria();
@@ -117,7 +152,7 @@ class Productos_controller extends CI_Controller
         }
     }
         
-    public function pagina_modificar_producto($cod) 
+    public function vista_modificar_producto($cod) 
     {
         /*$user = $this->session->userdata('usuario');
         $rol = $this->session->userdata('rol');
@@ -257,40 +292,7 @@ class Productos_controller extends CI_Controller
             }
         }
     }
-    //function obtener_productos() 
-     public function mostrar_productos()
-    {   
-        $productos = $this->Productos_model->seleccionar_productos_all();
         
-            if($productos != False)
-            {
-                $data['valor'] = true;
-                $data['productos'] = $productos;
-                $info['titulo'] = "Show Product";
-                $this->load->view('tema/header',$info);
-                $this->load->view('producto/listar_productos', $data);
-                $this->load->view('tema/footer');
-            }
-            else
-            {   
-                $data['valor'] = $productos;
-                $data['productos']="No hay información que mostrar";
-                $info['titulo'] = "Show Product";
-                $this->load->view('tema/header',$info);
-                $this->load->view('producto/listar_productos', $data);
-                $this->load->view('tema/footer');
-                        
-            }
-            
-        /*}
-        else 
-        {
-            $this->session->set_flashdata('error', 'Tiene que iniciar su sesión para acceder a esta página');
-            redirect('inicio_controller/index/', 'refresh');
-            //$this->redi();
-        }*/
-    }
-    
     function eliminar_producto() 
     {
         $id = $this->uri->segment('3');
