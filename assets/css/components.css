@@ -667,9 +667,12 @@ File: Components
   padding: 10px 20px;
 }
 .panel-default > .panel-heading {
-  background-color: #f4f8fb;
+  background-color: #36404a;
   border-bottom: none;
-  color: #797979;
+  color: #fff;
+}
+.panel-default > .panel-heading h2{
+  color: #fff;
 }
 .panel-title {
   font-size: 15px;

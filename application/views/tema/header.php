@@ -10,14 +10,13 @@
 
         <title><?php echo $titulo; ?></title>
 
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
+       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
 
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/core.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/components.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url(); ?>vassets/css/pages.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo base_url(); ?>assets/css/pages.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/responsive.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/propios.css" rel="stylesheet" type="text/css" />
@@ -27,9 +26,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+        <link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>assets/plugins/magnific-popup/dist/magnific-popup.css"/>
 
         <script src="<?php echo base_url(); ?>assets/js/modernizr.min.js"></script>
-
 
     </head>
 
