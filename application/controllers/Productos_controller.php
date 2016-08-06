@@ -30,6 +30,8 @@ class Productos_controller extends CI_Controller
             if($productos != False)
             {
                 $data['valor'] = true;
+                $data['categoria'] = $this->Categoria_model->seleccionar_categoria();
+                $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria();
                 $data['productos'] = $productos;
                 $info['titulo'] = "Show Product";
                 $this->load->view('tema/header',$info);

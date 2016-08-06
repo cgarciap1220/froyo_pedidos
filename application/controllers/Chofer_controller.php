@@ -20,7 +20,7 @@ class Chofer_controller extends CI_Controller
     
     function listar_chofer()
     { 
-        $info['titulo'] = "Show Pailot";
+        $info['titulo'] = "Show Driver";
         $this->load->view('tema/header',$info);
         $this->load->view('chofer/listar_chofer');
         $this->load->view('tema/footer');
@@ -28,7 +28,7 @@ class Chofer_controller extends CI_Controller
     
     function vista_agregar_chofer()
     { 
-        $info['titulo'] = "Add Pailot";
+        $info['titulo'] = "Add Driver";
         $this->load->view('tema/header',$info);
         $this->load->view('chofer/insertar_chofer');
         $this->load->view('tema/footer');
@@ -36,7 +36,7 @@ class Chofer_controller extends CI_Controller
     
     function vista_modificar_chofer()
     { 
-        $info['titulo'] = "Update Pailot";
+        $info['titulo'] = "Update Driver";
         $this->load->view('tema/header',$info);
         $this->load->view('chofer/modificar_chofer');
         $this->load->view('tema/footer');

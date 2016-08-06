@@ -19,10 +19,10 @@ class Subcategoria_controller extends CI_Controller
         $this->load->model('Subcategoria_model');
     }
     
-    function obtener_subsubcategoria_subcategoria()
+    function obtener_subcategoria_categoria()
     {
         $id = $this->uri->segment('3');
-        $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria_subcategoria($id);
+        $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria_categoria($id);
         $this->load->view('otros/subcategoria', $data);
     }
     
