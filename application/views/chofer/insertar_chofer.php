@@ -1,7 +1,4 @@
-
-  `no_licencia`
-  `fecha_vencimiento`
-  <div class="panel panel-default">
+<div class="panel panel-default">
     <div class="panel-heading"><?php echo $titulo; ?></div>
     <div class="panel-body">
         <!-- Nav tabs -->
@@ -20,7 +17,7 @@
                             <input name="codigo_producto" type="text" class="form-control" id="codigo_producto" placeholder="Enter the product code" required="" title="You need rewrite a product code">
                         </div>-->
                         <!--nombre_producto-->
-                       
+
                         <div class="form-group">
                             <label for="nombre">Driver name</label>
                             <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Enter driver name" required="" title="You need rewrite a driver name">
@@ -39,10 +36,14 @@
                             <input name="telefono" type="text" class="form-control" id="telefono" placeholder="Enter driver phone number" required="" title="You need rewrite the phone number of driver">
                         </div>
                         <div class="form-group">
-                            <label for="no_licencia">driver's license number</label>
-                            <input name="no_licencia" type="text" class="form-control" id="no_licencia" placeholder="Enter driver phone number" required="" title="You need rewrite the phone number of driver">
+                            <label for="no_licencia">Driver's license number</label>
+                            <input name="no_licencia" type="text" class="form-control" id="no_licencia" placeholder="Enter the number of driver's license" required="" title="You need rewrite the driver's license number">
                         </div>
-
+                        <div class="form-group">
+                            <label for="fecha_vencimiento">Expiration date driver's license number</label>
+                            <input name="fecha_vencimiento" type="date"  class="form-control" id="fecha_vencimiento" placeholder="dd/mm/yyyy" required="" title="You need rewrite the expiration date driver's license number">
+                        </div>           
+                        
                         <!--campo seguridad-->
                         <input type="hidden" name="login" value="ok">
                         <!--boton registrarse-->

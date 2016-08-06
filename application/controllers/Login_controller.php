@@ -32,7 +32,7 @@ class Login_controller extends CI_Controller {
 					foreach ($query as $key ) {
 						$data['id_usuario'] =  $key->id_usuario;
 						$data['nombre'] =  $key->nombre;
-						$data['correo	'] =  $key->correo;
+						$data['correo'] =  $key->correo;
 						$data['telefono'] =  $key->telefono;
 						$data['compannia'] =  $key->compannia;
 						$data['zipcode'] =  $key->zipcode;
@@ -40,6 +40,7 @@ class Login_controller extends CI_Controller {
 						$data['abbr'] =  $key->abbr;
 						$data['estado'] =  $key->estado;
 						$data['direccion'] =  $key->direccion;
+						$data['rol_id'] =  $key->rol_id;
 						$data['fecha_registro'] =  $key->fecha_registro;
 						$data['hora_registro'] =  $key->hora_registro;
 
@@ -50,8 +51,17 @@ class Login_controller extends CI_Controller {
 						redirect('Principal_controller/principal', 'refresh');
 				}	
 			}else{
-				redirect('Login_controller/login','refresh');
+				redirect('Login_controller/index','refresh');
 			}
 
 	}
+
+	public function cerrar()
+	{
+		$this->session->sess_destroy();
+	    redirect('Login_controller/index','refresh');
+	    $this->session->set_flashdata('correcto', 'Loguot');
+	}
+
+
 }

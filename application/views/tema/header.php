@@ -55,7 +55,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i>Update data</a></li>
-                                    <li><a href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Logout</a></li>
+                                    <li><a href="<?php echo base_url();?>Login_controller/cerrar"><i class="ti-power-off m-r-5"></i> Logout</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown navbar-c-items">
@@ -201,8 +201,8 @@
                             <li class="has-submenu">
                                 <a href="#"><i class="md md-color-lens"></i>Category</a>
                                 <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Categoria_controller/vista_agregar_categoria">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Categoria_controller/listar_categorias">List</a></li>
+                                    <li><a href="<?php echo base_url(); ?>Categoria_Controller/vista_agregar_categoria">Add</a></li>
+                                    <li><a href="<?php echo base_url(); ?>Categoria_Controller/listar_categorias">List</a></li>
                                 </ul>
                             </li>
 
@@ -230,7 +230,7 @@
                                 </ul>         
                             </li>
                             <li class="has-submenu">
-                                <a href="#"><i class="md  md-perm-contact-cal"></i>Pailot</a>
+                                <a href="#"><i class="md  md-perm-contact-cal"></i>Driver</a>
                                 <ul class="submenu">
                                     <li><a href="<?php echo base_url(); ?>Chofer_controller/vista_agregar_chofer">Add</a></li>
                                     <li><a href="<?php echo base_url(); ?>Chofer_controller/listar_chofer">List</a></li>
@@ -272,6 +272,47 @@
             </div>
         </header>
         <!-- End Navigation Bar-->
+         <div class="row" id="mensaje">
+            <div class="col-sm-12">
+                <section class="notification flashMsg">
+                    <!--notification start-->
+                    <?php if ($this->session->flashdata('correcto')): ?>
+                        <div class="alert alert-success fade in">
+                            <h4 class="text-center">
+                                <?php echo $this->session->flashdata('correcto') ?>
+                            </h4>
+                        </div>    
+                    <?php endif ?>
+                    <?php if ($this->session->flashdata('error')): ?>
+                        <div class="alert alert-danger fade in">
+                            <h4 class="text-center">
+                                <?php echo $this->session->flashdata('error') ?>
+                            </h4>
+                        </div>  
+                    <?php endif ?>
+
+                    <?php if ($this->session->flashdata('info')): ?>
+                        <div class="alert alert-info fade in">
+                            <h4 class="text-center">
+                                <?php echo $this->session->flashdata('info') ?> 
+                            </h4>
+                        </div>  
+                    <?php endif ?>
+
+                    <?php if ($this->session->flashdata('warning')): ?>
+                        <div class="alert alert-info fade in">
+                            <h4 class="text-center">
+                                <?php echo $this->session->flashdata('info') ?> 
+                            </h4>
+                        </div>  
+                    <?php endif ?>
+
+
+                    <!--notification end-->
+                </section>
+
+            </div>
+        </div>
 
         <div class="wrapper">
             <div class="container">

@@ -31,7 +31,13 @@
                             <label for="state">Licence plate</label>
                             <input name="placa" type="text" class="form-control" id="placa" placeholder="Enter the licence plate" required="" title="You need rewrite a licence plate">
                         </div>
-
+                        <div class="form-group">
+                            <label for="ruta">Truck routes</label>
+                            <select class="form-control" id="ruta" name="ruta[]" multiple="">
+                                
+                            </select>
+                            
+                        </div>
                         <!--campo seguridad-->
                         <input type="hidden" name="login" value="ok">
                         <!--boton registrarse-->
