@@ -28,11 +28,11 @@
                             </div>
 
                             <div class="detail">
-                                <h4 class="m-t-0 m-b-5"><a href="" class="text-dark">Branded camera A1254</a></h4>
+                                <h4 class="m-t-0 m-b-5"><a href="" class="text-dark">Product</a></h4>
                                 <div class="rating">
 
                                 </div>
-                                <h5 class="m-0"><span class="text-custom">$ 125</span> <span class="text-muted m-l-15"> Stock :98pcs.</span></h5>
+                                <h5 class="m-0"><span class="text-custom">$ 125</span> <span class="text-muted m-l-15"> Stock </span></h5>
 
                             </div>
                         </div>
@@ -59,11 +59,11 @@
                             </div>
 
                             <div class="detail">
-                                <h4 class="m-t-0 m-b-5"><a href="" class="text-dark">Branded camera A1254</a></h4>
+                                <h4 class="m-t-0 m-b-5"><a href="" class="text-dark">Product</a></h4>
                                 <div class="rating">
 
                                 </div>
-                                <h5 class="m-0"><span class="text-custom">$ 125</span> <span class="text-muted m-l-15"> Stock :98pcs.</span></h5>
+                                <h5 class="m-0"><span class="text-custom">$ 125</span> <span class="text-muted m-l-15"> Stock.</span></h5>
 
                             </div>
                         </div>

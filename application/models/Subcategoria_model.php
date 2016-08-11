@@ -1,16 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Subcategoria_model
- *
- * @author Cindy
- */
 class Subcategoria_model extends CI_Model
 {
     public function __construct() 
@@ -18,22 +6,49 @@ class Subcategoria_model extends CI_Model
         parent::__construct();
     }
     
-    function seleccionar_subcategoria_categoria($id)
+    function obtener_categorias()
     {
-        $this->db->where('categoria_id',$id);
-        $query = $this->db->get('subcategoria');
-        if( $query->num_rows() > 0)
+        $this->db->order_by('categoria','asc');
+        $query = $this->db->get('categoria');
+        if( $query->num_rows() > 0){
             return $query->result();
-        else
+        }
+        else{
             return FALSE;
+        }
     }
+
+
+    public function procesa_categoria_subcategoria($data)
+    {
     
-    function seleccionar_subcategoria()
-    {
-        $query = $this->db->get('subcategoria');
-        if( $query->num_rows() > 0)
-            return $query->result();
-        else
+    $this->db->where('categoria_id', $data['categoria_id']);
+    $this->db->where('subcategoria', $data['subcategoria']);
+    $query = $this->db->get('subcategoria');
+
+        if ($query->num_rows() == 0) {
+            return $this->db->insert('subcategoria',$data);
+        }else{
             return FALSE;
+        }
+
+    
     }
+
+    public function subcategoria($id)
+    {
+        $this->db->where('categoria_id', $id);
+        $query = $this->db->get('subcategoria');
+
+        if ($query->num_rows() != 0) {
+            return $query->result_array();
+        }else{
+            return FALSE;
+        }
+    }
+
+    
+    
+    
+ 
 }

@@ -11,7 +11,7 @@
         <title><?php echo $titulo; ?></title>
 
        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
-
+        <link href="<?php echo base_url();?>assets/plugins/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/core.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/components.css" rel="stylesheet" type="text/css" />
@@ -254,15 +254,15 @@
                             </li>
 
                             <li class="">
-                                <a href="<?php echo base_url(); ?>Tienda_controller/tienda"><i class="md md-shopping-cart"></i>Store</a>
+                                <a href="<?php echo base_url();?>Tienda_controller/tienda"><i class="md md-shopping-cart"></i>Store</a>
                             </li>
 
                             <li class="">
-                                <a href="<?php echo base_url(); ?>Contacto_controller/contacto"><i class="md md-account-child"></i>Contact</a>
+                                <a href="<?php echo base_url();?>Contacto_controller/contacto"><i class="md md-account-child"></i>Contact</a>
                             </li>
                         
                             <li class="">
-                                <a href="#"><i class="md md-description"></i>Reports</a>
+                                <a href="<?php echo base_url();?>Reportes_controller/listar_reportes"><i class="md md-description"></i>Reports</a>
                             </li>
                             
                         </ul>
@@ -272,47 +272,48 @@
             </div>
         </header>
         <!-- End Navigation Bar-->
-         <div class="row" id="mensaje">
-            <div class="col-sm-12">
-                <section class="notification flashMsg">
-                    <!--notification start-->
-                    <?php if ($this->session->flashdata('correcto')): ?>
-                        <div class="alert alert-success fade in">
-                            <h4 class="text-center">
-                                <?php echo $this->session->flashdata('correcto') ?>
-                            </h4>
-                        </div>    
-                    <?php endif ?>
-                    <?php if ($this->session->flashdata('error')): ?>
-                        <div class="alert alert-danger fade in">
-                            <h4 class="text-center">
-                                <?php echo $this->session->flashdata('error') ?>
-                            </h4>
-                        </div>  
-                    <?php endif ?>
-
-                    <?php if ($this->session->flashdata('info')): ?>
-                        <div class="alert alert-info fade in">
-                            <h4 class="text-center">
-                                <?php echo $this->session->flashdata('info') ?> 
-                            </h4>
-                        </div>  
-                    <?php endif ?>
-
-                    <?php if ($this->session->flashdata('warning')): ?>
-                        <div class="alert alert-info fade in">
-                            <h4 class="text-center">
-                                <?php echo $this->session->flashdata('info') ?> 
-                            </h4>
-                        </div>  
-                    <?php endif ?>
-
-
-                    <!--notification end-->
-                </section>
-
-            </div>
-        </div>
 
         <div class="wrapper">
             <div class="container">
+            <!--notification start-->
+             <div class="row" id="mensaje">
+                <div class="col-sm-12">
+                    <section class="notification flashMsg">
+
+                        <?php if ($this->session->flashdata('correcto')): ?>
+                            <div class="alert alert-success fade in">
+                                <h4 class="text-center">
+                                    <?php echo $this->session->flashdata('correcto') ?>
+                                </h4>
+                            </div>    
+                        <?php endif ?>
+
+                        <?php if ($this->session->flashdata('error')): ?>
+                            <div class="alert alert-danger fade in">
+                                <h4 class="text-center">
+                                    <?php echo $this->session->flashdata('error') ?>
+                                </h4>
+                            </div>  
+                        <?php endif ?>
+
+                        <?php if ($this->session->flashdata('info')): ?>
+                            <div class="alert alert-info fade in">
+                                <h4 class="text-center">
+                                    <?php echo $this->session->flashdata('info') ?> 
+                                </h4>
+                            </div>  
+                        <?php endif ?>
+
+                        <?php if ($this->session->flashdata('warning')): ?>
+                            <div class="alert alert-info fade in">
+                                <h4 class="text-center">
+                                    <?php echo $this->session->flashdata('info') ?> 
+                                </h4>
+                            </div>  
+                        <?php endif ?>  
+                                        
+                    </section>
+
+                </div>
+            </div>
+          <!--notification end-->

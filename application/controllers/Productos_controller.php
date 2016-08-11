@@ -17,23 +17,22 @@ class Productos_controller extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Productos_model');
-        $this->load->model('Categoria_model');
-        $this->load->model('Subcategoria_model');
-        
+        $this->load->model('Productos_model');
+        $this->load->model('Productos_model');
     }
     
     //function obtener_productos() 
      public function mostrar_productos()
     {   
-        $productos = $this->Productos_model->seleccionar_productos_all();
+        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) 
+        {    
+            $productos = $this->Productos_model->seleccionar_productos_all();
         
             if($productos != False)
             {
                 $data['valor'] = true;
-                $data['categoria'] = $this->Categoria_model->seleccionar_categoria();
-                $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria();
                 $data['productos'] = $productos;
-                $info['titulo'] = "Show Product";
+                $info['titulo'] = "List Product";
                 $this->load->view('tema/header',$info);
                 $this->load->view('producto/listar_productos', $data);
                 $this->load->view('tema/footer');
@@ -41,51 +40,59 @@ class Productos_controller extends CI_Controller
             else
             {   
                 $data['valor'] = $productos;
-                $data['productos']="No hay información que mostrar";
+                $data['productos']="There is no information to display";
                 $info['titulo'] = "Show Product";
                 $this->load->view('tema/header',$info);
                 $this->load->view('producto/listar_productos', $data);
                 $this->load->view('tema/footer');
                         
             }
-            
-        /*}
-        else 
+        }    
+        else
         {
-            $this->session->set_flashdata('error', 'Tiene que iniciar su sesión para acceder a esta página');
-            redirect('inicio_controller/index/', 'refresh');
-            //$this->redi();
-        }*/
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        } 
     }
     
     public function vista_agregar_producto()
     {
-        $data['categoria'] = $this->Categoria_model->seleccionar_categoria();
-        $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria();
-        $info['titulo'] = "Add Product";
-        $this->load->view('tema/header',$info);
-        $this->load->view('producto/crear_producto',$data);
-        $this->load->view('tema/footer');
+        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) 
+        {
+            $data['valor'] = true;
+            $data['categoria'] = $this->Productos_model->seleccionar_categoria();
+            $data['subcategoria'] = $this->Productos_model->seleccionar_subcategoria();
+
+            $info['titulo'] = "Add Product";
+            $this->load->view('tema/header',$info);
+            $this->load->view('producto/crear_producto', $data);
+            $this->load->view('tema/footer');
+        }
+        else
+        {
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        }   
         
     }
     
     function agregar_producto()
     {
-        $this->load->helper('text_helper');
-        //$codigo_producto = $this->input->post('codigo_producto');
-        $nombre_producto = $this->input->post('nombre_producto');
-        $nivel_ventas = $this->input->post('nivel_ventas');
-        $stoke = $this->input->post('stoke');
-        $estado = $this->input->post('estado');
-        $categoria = $this->input->post('categoria');
-        $subcategoria = $this->input->post('subcategoria');
-        $peso = $this->input->post('peso');
+        $nombre_producto = $this->security->xss_clean(strip_tags($this->input->post('nombre_producto')));
+        $nivel_ventas = $this->security->xss_clean(strip_tags($this->input->post('nivel_ventas')));
+        $stoke = $this->security->xss_clean(strip_tags($this->input->post('stoke')));
+        $estado = $this->security->xss_clean(strip_tags($this->input->post('estado')));
+        $categoria = $this->security->xss_clean(strip_tags($this->input->post('categoria')));
+        $subcategoria = $this->security->xss_clean(strip_tags($this->input->post('subcategoria')));
+        $peso = $this->security->xss_clean(strip_tags($this->input->post('peso')));
         $fecha_creacion = date('Y-m-d');
         date_default_timezone_set("America/Guatemala");
         $hora_creacion = date('g:i:s a', time() - 3600 * date('I'));
-        $descripcion = $this->input->post('descripcion');
+        $descripcion = $this->security->xss_clean(strip_tags($this->input->post('descripcion')));
         //GARGAR IMAGEN
+        $this->load->helper('text_helper');
         $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
+        //$nombre_imagen = $this->security->xss_clean(strip_tags($this->input->post('userfile')));
         $nombre_modificado = str_replace('jpg','',$nombre_imagen);
         $nombre_modificado .= '.jpg';
         $config['max_size'] = 6000;
@@ -105,19 +112,23 @@ class Productos_controller extends CI_Controller
             echo $this->image_lib->display_errors();
         }
         $foto = 'uploads/'.$nombre_modificado;
-        if($estado == "Seleccionar")
+        if($nivel_ventas == "Select level")
+        {
+            $nivel_ventas = null;
+        }
+        if($estado == "Select state")
         {
             $estado = null;
         }
-        if($stoke == "Seleccionar")
+        if($stoke == "Select stoke")
         {
             $stoke = null;
         }
-        if($categoria == "Seleccionar")
+        if($categoria == "Select category")
         {
             $categoria = null;
         }
-        if($subcategoria == "Seleccionar")
+        if($subcategoria == "Select subcategory")
         {
             $subcategoria = null;
         }
@@ -137,18 +148,18 @@ class Productos_controller extends CI_Controller
                         'fecha_creacion' => $fecha_creacion,
                         'hora_creacion' => $hora_creacion,
                         'descripcion' => $descripcion,
-         );
+            );
             $insertar = $this->Productos_model->insertar_producto($data);
             if ($insertar == true)
             {
                 $codigo_producto = $this->Productos_model->obtener_codigo_producto();
-                $this->session->set_flashdata('correcto','Se agregó su producto exitosamente');
+                $this->session->set_flashdata('correcto','Your product is successfully added');
                 redirect('Caracteristicas_controller/pagina_agregar_producto_caracteristicas/'.$codigo_producto,'refresh');
-                //$this->pagina_agregar_producto_caracteristicas($codigo_producto);
+                
             }
             else
             {
-                $this->session->set_flashdata('error','No se insertó correctamente el producto');
+                $this->session->set_flashdata('error','No correctly added the product');
                 redirect('Productos_controller/pagina_agregar_producto','refresh');
             }
         }
@@ -156,11 +167,9 @@ class Productos_controller extends CI_Controller
         
     public function vista_modificar_producto($cod) 
     {
-        /*$user = $this->session->userdata('usuario');
-        $rol = $this->session->userdata('rol');
-        if ( $rol == "Secretaria" or $rol == "Administrador") 
-        {  */ 
-            $info['title'] = "Actualizar Producto";
+        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) 
+        {
+            $info['titulo'] = "Update Product";
             $id = $this->uri->segment('3');
             if($id != $cod)
             {
@@ -172,62 +181,61 @@ class Productos_controller extends CI_Controller
             }
             $data['producto'] = $this->Productos_model->seleccionar_producto_id($cod_prod);
             $data['prod_id'] = $cod_prod;
-            $data['categoria'] = $this->Categoria_model->seleccionar_categoria();
-            $data['subcategoria'] = $this->Subcategoria_model->seleccionar_subcategoria();
+            $data['categoria'] = $this->Productos_model->seleccionar_categoria();
+            $data['subcategoria'] = $this->Productos_model->seleccionar_subcategoria();
             $info['titulo'] = "Update Product";
             $this->load->view('tema/header',$info);
             $this->load->view('producto/actualizar_producto', $data);
             $this->load->view('tema/footer');
            
-       /* }
-        else 
+       }
+        else
         {
-            $this->session->set_flashdata('error', 'Tiene que iniciar su sesión para acceder a esta página');
-            redirect('inicio_controller/index/', 'refresh');
-            //$this->redi();
-        }*/
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        } 
     }
         
     function actualizar_producto()
     {
         $this->load->helper('text_helper');
-        $id = $this->uri->segment('3');
+        $codigo_producto = $this->uri->segment('3');
         //$codigo_producto = $this->input->post('codigo_producto');
-        $nombre_producto = $this->input->post('nombre_producto');
-        $nivel_ventas = $this->input->post('nivel_ventas');
-        $stoke = $this->input->post('stoke');
-        $estado = $this->input->post('estado');
-        $categoria = $this->input->post('categoria');
-        $subcategoria = $this->input->post('subcategoria');
-        $peso = $this->input->post('peso');
+        $nombre_producto = $this->security->xss_clean(strip_tags($this->input->post('nombre_producto')));
+        $nivel_ventas = $this->security->xss_clean(strip_tags($this->input->post('nivel_ventas')));
+        $stoke = $this->security->xss_clean(strip_tags($this->input->post('stoke')));
+        $estado = $this->security->xss_clean(strip_tags($this->input->post('estado')));
+        $categoria = $this->security->xss_clean(strip_tags($this->input->post('categoria')));
+        $subcategoria = $this->security->xss_clean(strip_tags($this->input->post('subcategoria')));
+        $peso = $this->security->xss_clean(strip_tags($this->input->post('peso')));
         /*$fecha_creacion = date('Y-m-d');
         date_default_timezone_set("America/Guatemala");
         $hora_creacion = date('g:i:s a', time() - 3600 * date('I'));*/
-        $descripcion = $this->input->post('descripcion');
+        $descripcion = $this->security->xss_clean(strip_tags($this->input->post('descripcion')));
         //$imagen = $this->input->post('userfile');
         $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
-        if($nivel_ventas == "Seleccionar")
+        if($nivel_ventas == "Select level")
         {
             $nivel_ventas = null;
         }
-        if($estado == "Seleccionar")
+        if($estado == "Select state")
         {
             $estado = null;
         }
-        if($stoke == "Seleccionar")
+        if($stoke == "Select stoke")
         {
             $stoke = null;
         }
-        if($categoria == "Seleccionar")
+        if($categoria == "Select category")
         {
             $categoria = null;
         }
-        if($subcategoria == "Seleccionar")
+        if($subcategoria == "Select subcategory")
         {
             $subcategoria = null;
         }
         //$foto = 'assets/images/'.$nombre_modificado;
-         if(($codigo_producto != "") &&($nombre_producto != "")&&($nivel_ventas != NULL)&&($categoria != NULL)&&($estado != NULL)&&($stoke != NULL) && ($peso !=""))
+        if(($nombre_producto != "")&&($nivel_ventas != "Select level")&&($categoria != "")&&($estado != "")&&($stoke != "") && ($peso !=""))
         {
             if($nombre_imagen != "")
             {
@@ -252,8 +260,7 @@ class Productos_controller extends CI_Controller
                 }
                 $foto = 'uploads/'.$nombre_modificado;
                
-                $data = array('codigo_producto'=>$codigo_producto,
-                        'nombre_producto'=>$nombre_producto,
+                $data = array('nombre_producto'=>$nombre_producto,
                         'nivel_ventas'=>$nivel_ventas = $nivel_ventas,
                         'stoke' => $stoke,
                         'estado' =>  $estado,
@@ -265,13 +272,12 @@ class Productos_controller extends CI_Controller
                         'foto_media' => $foto,
                         'foto_big' => $foto,
                 );
-               $actualizar = $this->Productos_model->modificar_producto($id,$data);
+               $actualizar = $this->Productos_model->modificar_producto($codigo_producto,$data);
             }
             else
             {
-                $data = array('codigo_producto'=>$codigo_producto,
-                            'nombre_producto'=>$nombre_producto,
-                            'nivel_ventas'=>$nivel_ventas = $nivel_ventas,
+                $data = array('nombre_producto'=>$nombre_producto,
+                            'nivel_ventas'=>$nivel_ventas,
                             'stoke' => $stoke,
                             'estado' =>  $estado,
                             'categoria_id' => $categoria,
@@ -280,16 +286,16 @@ class Productos_controller extends CI_Controller
                             'descripcion' => $descripcion,
 
                         );
-                $actualizar = $this->Productos_model->modificar_producto($id,$data);
+                $actualizar = $this->Productos_model->modificar_producto($codigo_producto,$data);
             }
             if ($actualizar == true)
             {
-                $this->session->set_flashdata('correcto','Se actualizó su producto exitosamente');
-                $this->pagina_modificar_producto($codigo_producto);
+                $this->session->set_flashdata('correcto','Successfully he updated your product');
+                $this->vista_modificar_producto($codigo_producto);
             }
             else
             {
-                $this->session->set_flashdata('error','No se actualizó correctamente el producto');
+                $this->session->set_flashdata('error','Not properly update the product');
                 $this->pagina_modificar_producto($codigo_producto);
             }
         }
@@ -301,15 +307,22 @@ class Productos_controller extends CI_Controller
         $eliminar = $this->Productos_model->quitar_producto($id);
         if($eliminar == TRUE)
         {
-            $this->session->set_flashdata('correcto','Se eliminó correctamente el producto');
-            redirect('productos_controller/index/', 'refresh');
+            $this->session->set_flashdata('correcto','The product was successfully removed');
+            redirect('productos_controller/mostrar_productos/', 'refresh');
         }
         else
         {
-            $this->session->set_flashdata('correcto','No se pudo eliminar el producto correctamente');
-            redirect('productos_controller/index/', 'refresh');
+            $this->session->set_flashdata('correcto','Could not remove the product correctly');
+            redirect('productos_controller/mostrar_productos/', 'refresh');
         }
         
+    }
+    
+    function obtener_subcategoria_categoria()
+    {
+        $id = $this->uri->segment('3');
+        $data['subcategoria'] = $this->Productos_model->seleccionar_subcategoria_categoria($id);
+        $this->load->view('otros/subcategoria', $data);
     }
     
     

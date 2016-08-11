@@ -888,9 +888,9 @@ textarea.form-control {
   margin-top: 10px;
 }
 .alert-success {
-  background-color: rgba(95, 190, 170, 0.3);
-  border-color: rgba(95, 190, 170, 0.4);
-  color: #5fbeaa;
+  background-color:#006633;
+  border-color: #006633;
+  color: #fff;
 }
 .alert-info {
   background-color: rgba(52, 211, 235, 0.2);
@@ -903,9 +903,9 @@ textarea.form-control {
   color: #ffbd4a;
 }
 .alert-danger {
-  background-color: rgba(240, 80, 80, 0.2);
-  border-color: rgba(240, 80, 80, 0.3);
-  color: #f05050;
+  background-color: red;
+  border-color: red;
+  color: #fff;
 }
 /* Modals */
 .modal .modal-dialog .modal-content {

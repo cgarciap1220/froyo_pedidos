@@ -34,7 +34,7 @@ class Caracteristicas_controller extends CI_Controller{
     
     function agregar_producto_caracteristicas()
     {
-       //$si = $this->uri->segment('3');
+        $si = $this->uri->segment('3');
         $codigo_producto = $this->input->post('codigo_producto');
         $codigo_especifico = $this->input->post('codigo_especifico');
         $ancho = $this->input->post('ancho');
@@ -46,15 +46,15 @@ class Caracteristicas_controller extends CI_Controller{
         $color = $this->input->post('color');
         $sabor = $this->input->post('sabor');
         
-        if($existencia == "Seleccionar")
+        if($existencia == "Select Existence")
         {
             $existencia = null;
         }
-        if($color == "Seleccionar")
+        if($color == "Select Color")
         {
             $color = null;
         }
-        if($sabor == "Seleccionar")
+        if($sabor == "Select Flavor")
         {
             $sabor = null;
         }
@@ -106,6 +106,16 @@ class Caracteristicas_controller extends CI_Controller{
                         'codigo_especifico'=>$codigo_especifico,
                     );
                 $insert_caract = $this->Caracteriscticas_model->insertar_caracteristicas($caract);
+                if (($insert_caract == true) && ($si == null))
+                {
+                    $this->session->set_flashdata('correcto','The presentation of their product was added correctly');
+                    redirect('Caracteristicas_controller/pagina_agregar_producto_caracteristicas/'.$codigo_producto,'refresh');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error','The presentation of their product was not added correctly');
+                    redirect('Productos_controller/vista_agregar_producto','refresh');
+                }
                 
             }
         }

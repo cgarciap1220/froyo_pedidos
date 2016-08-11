@@ -1,90 +1,113 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <script>
-        window.onload = function () {
-            loadCaracteristicas();
-        }
-    </script>
-    <script>
-        var url = <?php echo json_encode(base_url(), JSON_HEX_TAG); ?>;
-    </script>
-    <body>
-        <form id="form" name="form" method="post" enctype="multipart/form-data" action="<?php echo base_url() ?>Caracteristicas_controller/agregar_producto_caracteristicas">
-            
-            <input name="codigo_producto" type="hidden" id="codigo_producto"  value="<?php echo $codigoproducto ?>"/>
-            <label>Codigo del Producto: </label>
-            <input name="codigo_especifico" type="text" id="codigo_especifico" />
-            <label>Ancho:</label>
-            <input name="ancho" id="ancho">
-            <label>Alto:</label>
-            <input name="alto" id="alto">
-            <label>Largo:</label>
-            <input name="largo" id="largo">
-            <label>Tamaño:</label>
-            <input name="tamanno" id="tamanno">
-            <label>Color:</label>
-            <input type="checkbox" name="si_color" id="si_color" onclick="return check_color();" />
-            <select name="color" id="color" class="form-control" hidden="" >
-                <option selected="selected">Seleccionar</option>
-                <?php foreach ($color as $color): ?>
-                    <option value="<?php echo $color->id_color ?>">
-                        <?php echo $color->color ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            <label>Sabor:</label>
-            <input type="checkbox" name="si_sabor" id="si_sabor" onclick="return check_sabor();" />
-            <select name="sabor" id="sabor" class="form-control" hidden="" >
-                <option selected="selected">Seleccionar</option>
-                <?php foreach ($sabor as $sabor): ?>
-                    <option value="<?php echo $sabor->id_sabor ?>">
-                        <?php echo $sabor->sabor ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            <label>Existencia:</label>
-            <select name="existencia" id="existencia" >
-                <option selected="selected">Seleccionar</option>
-                <option>Si</option>
-                <option>No</option>
-            </select>
-            <label>Precio:</label>
-            <input name="precio" id="precio">
-            <label>Selecciona Foto: </label>
-            <input name="userfile" type="file" />
-            <input type="submit" value="Agregar Características" onclick="//return confirmCaracteristicas();">
-        </form>
-    </body>
+<script>
+    var url = <?php echo json_encode(base_url(), JSON_HEX_TAG); ?>;
+</script>
+<script>
+   /* window.onload = function () {
+        loadCaracteristicas();
+    }*/
+</script>
+<div class="panel panel-default">
+    <div class="panel-heading"><?php echo $titulo; ?></div>
+    <div class="panel-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Product Features</a></li>
+        </ul>
+        <!-- inicio formulario -->
+        <form action="<?php echo base_url() ?>Caracteristicas_controller/agregar_producto_caracteristicas" method="POST" enctype="multipart/form-data" id="insertar_caracteristicas">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="category" enctype="multipart/form-data">
+                    <div class="contenedor-formulario">
+                        <!--codigo_producto-->
+                        <!--<div class="form-group">
+                            <label for="state">Product code</label>
+                            <input name="codigo_producto" type="text" class="form-control" id="codigo_producto" placeholder="Enter the product code" required="" title="You need rewrite a product code">
+                        </div>-->
+                        <!--nombre_producto-->
+                        <div class="form-group">
+                            <input name="codigo_producto" type="hidden" id="codigo_producto"  value="<?php echo $codigoproducto ?>"/>
+                            <label>Product Code </label>
+                            <input name="codigo_especifico" type="text" class="form-control" id="codigo_especifico" placeholder="Enter product code" required="" title="You need rewrite a product code">
+                        </div>
+                        <!--nombre_producto-->
+                        <div class="form-group">
+                            <label for="empresa">Width</label>
+                            <input name="ancho" type="text" class="form-control" id="ancho" placeholder="Enter product width" required="" title="You need rewrite a product width"> 
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">High</label>
+                            <input name="alto" type="text" class="form-control" id="alto" placeholder="Enter product high" required="" title="You need rewrite a product high"> 
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Long</label>
+                            <input name="largo" type="text" class="form-control" id="largo" placeholder="Enter product long" required="" title="You need rewrite a product long"> 
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Size</label>
+                            <input name="tamanno" type="text" class="form-control" id="tamanno" placeholder="Enter product size" required="" title="You need rewrite a product size"> 
+                        </div>
+                        <div class="form-group" id="sugcategoria">
+                            <label>Color:</label>
+                            <input type="checkbox" name="si_color" id="si_color" onclick="return check_color();" />
+                            <select name="color" id="color" class="form-control" hidden="" >
+                                <option selected="selected">Select Color</option>
+                                <?php foreach ($color as $color): ?>
+                                    <option value="<?php echo $color->id_color ?>">
+                                        <?php echo $color->color ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Flavor</label>
+                            <input type="checkbox" name="si_sabor" id="si_sabor" onclick="return check_sabor();" />
+                            <select name="sabor" id="sabor" class="form-control" hidden="" >
+                                <option selected="selected">Select Flavor</option>
+                                <?php foreach ($sabor as $sabor): ?>
+                                    <option value="<?php echo $sabor->id_sabor ?>">
+                                        <?php echo $sabor->sabor ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">Existence</label>
+                            <select name="existencia" id="existencia" class="form-control">
+                                <option selected="selected">Select Existence</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Price</label>
+                            <input name="precio" type="text" class="form-control" id="precio" placeholder="Enter product price" required="" title="You need rewrite a product price"> 
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                            <input type="text" class="form-control" readonly="" name="userfile" id="userfile" required="">
+                            <label class="input-group-btn">
+                                <span class="btn btn-default">
+                                    Browse… <input type="file" style="display: none;" multiple=multiple"">
+                                </span>
+                            </label>
+                        </div>
+                            <!--<label>Select Photo</label>
+                            <input name="userfile" type="file" id="userfile" required=""/>-->
+                        </div>
 
-    <script>
-        function check_color()
-        {
-            var color = document.getElementById("si_color").checked;
-            //alert (check);
-            if (color == true)
-            {
-                $("#color").show();
-            } else
-            {
-                $("#color").hide();
-            }
-        }
-        function check_sabor()
-        {
-            var sabor = document.getElementById("si_sabor").checked;
-            //alert (check);
-            if (sabor == true)
-            {
-                $("#sabor").show();
-            } else
-            {
-                $("#sabor").hide();
-            }
-        }
-    </script>
-    <script src="<?php echo base_url(); ?>assets/jquery.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/validaciones.js"></script>
-</html>
+                        <!--campo seguridad-->
+                        <input type="hidden" name="login" value="ok">
+                        <!--boton registrarse-->
+                        <input type="submit" class="btn btn-primary" value="Add Product" onclick="return confirmCaracteristicas();">
+                    </div>
+                </div>
+            </div>  
+        </form>
+        <!-- final formulario -->
+
+
+    </div>
+</div>
+
+

@@ -1,17 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-heading"><?php echo $titulo;?></div>
   <div class="panel-body">
-    <!-- Nav tabs 
+    <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">User</a></li>
         <li role="presentation"><a href="#company" aria-controls="company" role="tab" data-toggle="tab">Company</a></li>
         <li role="presentation"><a href="#address" aria-controls="address" role="tab" data-toggle="tab">Address</a></li>
-      </ul>-->
+      </ul>
     <!-- inicio formulario -->
     <form action="<?php echo base_url();?>Usuario_controller/agregar_usuario" method="POST" >
               <!-- Tab panes -->
       <div class="tab-content">
-            <!--<div role="tabpanel" class="tab-pane fade in active" id="user">-->
+            <div role="tabpanel" class="tab-pane fade in active" id="user">
                 <div class="contenedor-formulario">
                     <!--correo -->
                     <div class="form-group">
@@ -37,7 +37,7 @@
                         </div>
                 </div>
             </div>
-            <!--<div role="tabpanel" class="tab-pane fade" id="company">-->
+            <div role="tabpanel" class="tab-pane fade" id="company">
                 <div class="contenedor-formulario">
                      <!--nombre de la empresa-->
                     <div class="form-group">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <!--<div role="tabpanel" class="tab-pane fade" id="address">-->
+           <div role="tabpanel" class="tab-pane fade" id="address">
                 <div class="contenedor-formulario">
                    <!--statado-->
                         <div class="form-group">

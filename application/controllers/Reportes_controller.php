@@ -1,17 +1,23 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Reportes_controller
- *
- * @author Cindy
- */
 class Reportes_controller extends CI_Controller
 {
-    //put your code here
+    public function __construct() 
+    {
+        parent::__construct();        
+    }
+
+    function listar_reportes()
+    { 
+        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
+
+            $info['titulo'] = "Show Category";
+
+            $this->load->view('tema/header',$info);
+            $this->load->view('reportes/reportes');
+            $this->load->view('tema/footer');
+        }else{
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        }  
+    }
 }

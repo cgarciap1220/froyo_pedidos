@@ -6,7 +6,7 @@
         <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Subategory</a></li>
       </ul>
     <!-- inicio formulario -->
-    <form action="" method="POST">
+    <form action="<?php echo base_url();?>Subcategoria_controller/obtener_subcategoria_categoria" method="POST">
               <!-- Tab panes -->
       <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="category">
@@ -14,17 +14,21 @@
                 <!--statado-->
                         <div class="form-group">
                             <label for="state">Category</label>
-                            <select class="form-control" id="abbr" name="abbr">
-                                <option value="1">Select Category</option>           
-                                <option value="AL">Category</option>
-                                <option value="AL">Category</option>
-                                <option value="AL">Category</option>
+                            <select class="form-control" id="categoria_id" name="categoria_id">
+                                <option value="1">Select Category</option>    
+                                <?php 
+                                    foreach ($query as $key) {
+                                      ?>
+                                        <option value="<?php echo $key->id_categoria;?>"><?php echo $key->categoria;?></option>
+                                      <?php
+                                    }
+                                 ?>
                             </select>
                         </div>
                     <!--subcategoria-->
                     <div class="form-group">
                         <label for="empresa">Subcategory</label>
-                        <input name="subcategoria" type="password" class="form-control" id="subcategoria" placeholder="Enter Subcategory" required="" title="You need rewrite a category">
+                        <input name="subcategoria" type="text" class="form-control" id="subcategoria" placeholder="Enter Subcategory" required="" title="You need rewrite a category">
                     </div>
                     <!--campo seguridad-->
                     <input type="hidden" name="login" value="ok">

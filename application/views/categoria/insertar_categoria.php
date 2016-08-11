@@ -6,7 +6,7 @@
         <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Category</a></li>
       </ul>
     <!-- inicio formulario -->
-    <form action="" method="POST">
+    <form action="<?php echo base_url();?>Categoria_controller/agregar_categoria" method="POST">
               <!-- Tab panes -->
       <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="category">
@@ -14,7 +14,7 @@
                     <!--Contrasena-->
                     <div class="form-group">
                         <label for="empresa">Category</label>
-                        <input name="categoria" type="password" class="form-control" id="categoria" placeholder="Enter Category" required="" title="You need rewrite a category">
+                        <input name="categoria" type="text" class="form-control" id="categoria" placeholder="Enter Category" required="" title="You need rewrite a category">
                     </div>
                     <!--campo seguridad-->
                     <input type="hidden" name="login" value="ok">

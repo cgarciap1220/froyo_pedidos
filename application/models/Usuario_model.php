@@ -8,8 +8,8 @@ class Usuario_model extends CI_Model {
 	}
 
 	public function procesa_insertar($data){
+	
 	$this->db->where('correo', $data['correo']);
-	$this->db->where('compannia', $data['compannia']);
 	$query = $this->db->get('usuario');
 
 		if ($query->num_rows() == 0) {
@@ -19,5 +19,47 @@ class Usuario_model extends CI_Model {
 		}
 
 	}
+
+	public function procesa_busqueda_usuarios($data)
+	{
+
+		if ($data['tipo_usuario'] == 5) {
+			$this->db->where('rol_id', 5);
+		}else{
+			$this->db->where('rol_id !=', 5);
+		}
+
+		$query = $this->db->get('usuario');
+		
+		if($query->num_rows() == 0){
+			return FALSE;
+		}else{
+			return $query->result();
+		}
+	}
+
+	public function editar_usuario($id){
+		$this->db->where('id_usuario', $id);
+		$query = $this->db->get('usuario');
+
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		}else{
+			return FALSE;
+		}
+	}
+
+	public function modificar_usuario($id,$data)
+    {
+        $this->db->where('id_usuario',$id);
+        return $this->db->update('usuario',$data);
+    }
+
+    public function eliminar_usuario($id)
+    {
+    	 $this->db->where('id_usuario',$id);
+    	 return $this->db->delete('usuario');	
+    }
+
 
 }

@@ -26,7 +26,7 @@ class Login_controller extends CI_Controller {
 
 		if(isset($query)){
 				if ($query == FALSE) {
-					$this->session->set_flashdata('info',' Usuario ó contraseña incorrectos, !!Vuelva a intentar¡¡');
+					$this->session->set_flashdata('error',' User or password incorrect, !!Vuelva a intentar¡¡');
 					redirect('Login_controller/index','refresh');
 				}else{
 					foreach ($query as $key ) {
@@ -47,7 +47,7 @@ class Login_controller extends CI_Controller {
 						$this->session->set_userdata($data);
 					}
 				
-						$this->session->set_flashdata('correcto','Inicio de sesión correcto.');
+						$this->session->set_flashdata('correcto','Login Successful.');
 						redirect('Principal_controller/principal', 'refresh');
 				}	
 			}else{

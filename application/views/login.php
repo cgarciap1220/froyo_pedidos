@@ -125,6 +125,7 @@
         <!-- jQuery  -->
         <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
         <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url();?>assets/js/propios.js"></script>
         <script src="<?php echo base_url();?>assets/js/detect.js"></script>
         <script src="<?php echo base_url();?>assets/js/fastclick.js"></script>
         <script src="<?php echo base_url();?>assets/js/jquery.slimscroll.js"></script>
