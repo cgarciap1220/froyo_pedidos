@@ -73,8 +73,32 @@ class Usuario_controller extends CI_Controller
     //Procesa los datos del formulario de busqueda de los usuarios. 
     function busqueda_usuarios()
     {
-        $data['tipo_usuario'] = $this->security->xss_clean(strip_tags($this->input->post('tipo_usuario')));
-        if (isset($data['tipo_usuario']) && $data['tipo_usuario'] !='') {
+        $tipo_usuario = $this->security->xss_clean(strip_tags($this->input->post('tipo_usuario')));
+        $buscar = $this->security->xss_clean(strip_tags($this->input->post('mostrar')));
+        if($buscar =='List now')
+        {
+            $this->session->unset_userdata('$tipo_usuario');
+            $this->session->unset_userdata('pag');
+            
+        }
+        $pag = $this->session->userdata('pag');
+        if ($pag!=null){
+            $pag++;
+           $this->mostrar_resultados_busqueda_usuarios();
+        }
+        /*else
+            $pag=0;*/
+        if ($pag==null){
+                $pag=1;
+                 $parametros = array(
+                     'tipo_usuario' =>$tipo_usuario,
+                     'pag' => $pag,
+                     );
+                $this->session->set_userdata($parametros);
+                $this->mostrar_resultados_busqueda_usuarios();
+        }
+        
+        /*if (isset($data['tipo_usuario']) && $data['tipo_usuario'] !='') {
 
             $query = $this->Usuario_model->procesa_busqueda_usuarios($data);
 
@@ -102,9 +126,76 @@ class Usuario_controller extends CI_Controller
                 $this->session->set_flashdata('correcto',' Empty input .');
                 redirect('Usuario_controller/listar_usuario', 'refresh');
             }
-        }
+        }*/
 
      
+    }
+    
+    function mostrar_resultados_busqueda_usuarios()
+    {
+        $pag = $this->session->userdata('pag');
+        $pag++;
+        $pag = array('pag' => $pag,);
+        $this->session->set_userdata($pag);
+        $tipo_usuario =  $this->session->userdata('tipo_usuario');
+        if($tipo_usuario != "") 
+        {
+            $limit = 10;
+            $offset = ($this->uri->segment(3) != '' ? $this->uri->segment(3):0);
+            /* URL a la que se desea agregar la paginación*/
+            $config['base_url'] = base_url().'Usuario_controller/mostrar_resultados_busqueda_usuarios/';
+            /*Obtiene el total de registros a paginar */
+            $config['total_rows'] = $this->Usuario_model->procesa_busqueda_usuarios($tipo_usuario);
+            /*Obtiene el numero de registros a mostrar por pagina */
+             $config['per_page'] = $limit;
+             $config['num_links'] = 20;
+            /*Indica que segmento de la URL tiene la paginación, por default es 3*/
+            $config['uri_segment'] = '3';
+            /*Se personaliza la paginación para que se adapte a bootstrap*/
+            $config['cur_tag_open'] = '<li class="active"><a href="#">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            $config['first_link'] = '<button class="btn btn-white btn-sm" type="button">First</button>';//primer link
+            $config['last_link'] = '<button class="btn btn-white btn-sm" type="button">Last</button>';//último link
+            $config['next_link'] = 'Next';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = 'Back';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+            /* Se inicializa la paginacion*/
+            $this->pagination->initialize($config);
+
+            $info['titulo'] = 'List Users';
+            $query = $this->Usuario_model->procesa_busqueda_usuarios_row($limit,$offset,$tipo_usuario);
+            if(isset($query)){
+                    
+                if ($query == FALSE) {
+
+                    $data['vacio'] = 'No data to print';
+                            
+                    $this->load->view('tema/header',$info);
+                    $this->load->view('usuarios/listar_usuarios',$data);
+                    $this->load->view('tema/footer');
+                            
+                }else{
+
+                    $data['query'] = $query;
+
+                    $this->load->view('tema/header',$info);
+                    $this->load->view('usuarios/listar_usuarios', $data);
+                    $this->load->view('tema/footer');    
+                }
+            }else{
+                $this->session->set_flashdata('correcto',' Empty input .');
+                redirect('Usuario_controller/listar_usuario', 'refresh');
+            }
+        }
+        else{
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        }
     }
     //carga la vista de modificar usuarios y coloca el contenido del registro especifico 
     function vista_modificar_usuario()

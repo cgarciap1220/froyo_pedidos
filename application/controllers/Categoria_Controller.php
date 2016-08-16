@@ -1,14 +1,14 @@
 <?php
 class Categoria_Controller extends CI_Controller
 {
-   public function __construct() 
+   public function __construct()
     {
-        parent::__construct();   
-        $this->load->model('Categoria_model');     
+        parent::__construct();
+        $this->load->model('Categoria_model');
     }
      //Carga la vista de instertar categoria y da parametros de seguridad.
     function vista_agregar_categoria()
-    { 
+    {
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
 
             $info['titulo'] = "Show Category";
@@ -19,15 +19,15 @@ class Categoria_Controller extends CI_Controller
         }else{
             $this->session->set_flashdata('error','Login to access.');
             redirect('Login_controller/index','refresh');
-        }  
+        }
     }
-    
-   //Procesa los datos del formulario de insertar categoria
-   function agregar_categoria()
+
+   //Procesa los datos del formulario de insertar categoría
+    function agregar_categoria()
     {
         $data['categoria'] =  $this->security->xss_clean(strip_tags($this->input->post('categoria')));
 
-        
+
         if ($data['categoria'] !='' ) {
             $query = $this->Categoria_model->procesa_categoria_insertar($data);
 
@@ -53,28 +53,28 @@ class Categoria_Controller extends CI_Controller
     function listar_categorias()
     {
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
-         
+
             $query = $this->Categoria_model->listar_categorias();
 
             $info['titulo'] = 'List Category';
 
             if(isset($query)){
-                    
+
                 if ($query == FALSE) {
 
                     $data['vacio'] = 'No data to print';
-                            
+
                     $this->load->view('tema/header',$info);
                     $this->load->view('categoria/listar_categoria',$data);
                     $this->load->view('tema/footer');
-                            
+
                 }else{
 
                     $data['query'] = $query;
 
                     $this->load->view('tema/header',$info);
                     $this->load->view('categoria/listar_categoria',$data);
-                    $this->load->view('tema/footer');    
+                    $this->load->view('tema/footer');
                 }
             }
 
@@ -89,7 +89,7 @@ class Categoria_Controller extends CI_Controller
     {
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
             $info['titulo'] = "Update Category";
-            $id = $this->uri->segment(3); 
+            $id = $this->uri->segment(3);
             $query = $this->Categoria_model->editar_categorias($id);
 
             if (isset($query)) {
@@ -102,7 +102,7 @@ class Categoria_Controller extends CI_Controller
                     $this->load->view('tema/footer');
                 }
             }
-           
+
         }else{
             $this->session->set_flashdata('error','Login to access.');
             redirect('Login_controller/index','refresh');
@@ -131,9 +131,9 @@ class Categoria_Controller extends CI_Controller
                     $this->vista_modificar_categoria($id);
                 }
             }else{
-            $this->session->set_flashdata('correcto',' Empty input .');
-            redirect('Categoria_controller/vista_agregar_categoria', 'refresh');
-        }
+                $this->session->set_flashdata('correcto',' Empty input .');
+                redirect('Categoria_controller/vista_agregar_categoria', 'refresh');
+            }
 
     }
 
@@ -157,6 +157,5 @@ class Categoria_Controller extends CI_Controller
     }
 
 
-  
-    
+
 }

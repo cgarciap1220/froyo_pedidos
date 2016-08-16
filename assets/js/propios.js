@@ -6,30 +6,30 @@ $(document).ready(function () {
 
 function eliminar(url)
 {
-    swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
-        closeOnConfirm: false,
-        closeOnCancel: false
-    }),
-            function (isConfirm)
-            {
-                if (isConfirm) {
-                    window.location = 'index.html';
-                } else {
-                    swal(
-                            'Cancel!',
-                            'Your file is save.',
-                            'success'
-                            );
-                }
-            }
-
+   swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+        closeOnConfirm: false,
+        closeOnCancel: false
+      }, 
+      function(isConfirm)
+      {
+          if (isConfirm) {
+              document.location=url;
+          }else{
+              swal(
+                  'Cancel!',
+                  'Your file is save.',
+                  'success'
+              );
+          }
+      }
+  );
 }
 
 $(function() {
@@ -112,25 +112,34 @@ $(document).ready(function () {
     
 function confirmCaracteristicas()
 {
-    var dir = url;
+    //var dir = url;
     var agree = confirm("You want to add more presentations this product");
-    if (!agree)
+    if (agree)
     {
-       $.ajax({
-            url: dir + "/caracteristicas_controller/agregar_producto_caracteristicas/"+agree,
+       /*$.ajax({
+            url: "<?php echo base_url(); ?>" + "/caracteristicas_controller/agregar_producto_caracteristicas/"+agree,
             //url: "obtener_municipio_dpto/" + dptoId,
             type: "POST"
 
-        });
+        });*/
         //return true;
-        /*var codigo_producto = document.getElementById("codigo_producto").value;
+        var codigo_producto = document.getElementById("codigo_producto").value;
         var obj = {
             codigo_producto: codigo_producto,
             
         };
-        sessionStorage.setItem('caratprod', JSON.stringify(obj));*/
+        sessionStorage.setItem('caratprod', JSON.stringify(obj));
     } 
-    
+    else
+    {
+        /*var no = 'hola';
+        alert(no);*/
+        $.ajax({
+            url: dir + "/caracteristicas_controller/agregar_producto_caracteristicas/"+agree,
+            //url: "obtener_municipio_dpto/" + dptoId,
+            type: "POST"
+        });
+    }
 }
 
 /*function loadCaracteristicas() {

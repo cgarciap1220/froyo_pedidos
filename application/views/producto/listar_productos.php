@@ -15,7 +15,7 @@
                         <td><strong>Category</strong></td>
                         <td><strong>Subategory</strong></td>
                         <td><strong>Sales level</strong></td>
-                        <td><strong>Stoke</strong></td>
+                        <td><strong>Description</strong></td>
                         <td><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></td>
                         <td><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></td>
                     </tr>
@@ -26,7 +26,7 @@
                         <td><?php echo $prod->categoria; ?></td>
                         <td><?php echo $prod->subcategoria; ?></td>
                         <td><?php echo $prod->nivel_ventas; ?></td>
-                        <td><?php echo $prod->stoke; ?></td>
+                        <td><?php echo $prod->descripcion; ?></td>
                         <td class="text-center">
                             <a href="<?php base_url() ?>/froyo_pedidos/Productos_controller/vista_modificar_producto/<?php echo $prod->codigo_producto; ?>">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -34,10 +34,6 @@
                         </td>
                         <td class="text-center">
                             <a href="javascript:eliminar('<?php base_url() ?>/froyo_pedidos/Productos_controller/eliminar_producto/<?php echo $prod->codigo_producto; ?>')">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>
-                            
-                            <a href="<?php base_url() ?>/froyo_pedidos/Productos_controller/eliminar_producto/<?php echo $prod->codigo_producto; ?>">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </a>
                         </td>

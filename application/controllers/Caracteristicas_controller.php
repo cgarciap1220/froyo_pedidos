@@ -74,8 +74,8 @@ class Caracteristicas_controller extends CI_Controller{
             {
                 $id_present = $this->Caracteriscticas_model->obtener_id_presentacion();
                 $this->load->helper('text_helper');
-              
                 $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
+                //$nombre_imagen = $this->security->xss_clean(strip_tags($this->input->post('userfile')));
                 $nombre_modificado = str_replace('jpg','',$nombre_imagen);
                 $nombre_modificado .= '.jpg';
                 $config['max_size'] = 6000;
@@ -93,8 +93,7 @@ class Caracteristicas_controller extends CI_Controller{
                 if(!$this->image_lib->resize())
                 {
                     echo $this->image_lib->display_errors();
-                }    
-                
+                }
                 $foto = 'uploads/'.$nombre_modificado;
                 $caract = array(
                         'producto_codigo'=>$codigo_producto,
@@ -119,18 +118,5 @@ class Caracteristicas_controller extends CI_Controller{
                 
             }
         }
-        
-        
-        /*if(($si == 'false'))
-        {
-            redirect('productos_controller/index/', 'refresh');
-            
-        }
-        else
-        {*/
-           // redirect('caracteristicas_controller/pagina_agregar_producto_caracteristicas/'.$codigo_producto,'refresh');
-        //}
-       
-    }
-    
+    }  
 }

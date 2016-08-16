@@ -16,11 +16,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="category" enctype="multipart/form-data">
                         <div class="contenedor-formulario">
-                            <!--codigo_producto-->
-                            <!--<div class="form-group">
-                                <label for="state">Product code</label>
-                                <input name="codigo_producto" type="text" class="form-control" id="codigo_producto" placeholder="Enter the product code" required="" title="You need rewrite a product code">
-                            </div>-->
+                            
                             <!--nombre_producto-->
                             <div class="form-group">
                                 <label for="empresa">Product name</label>
@@ -44,22 +40,7 @@
                                 </select>
 
                             </div>
-                            <div class="form-group">
-                                <label for="empresa">Stoke</label>
-                                <select class="form-control" name="stoke" id="stoke" required="">
-                                    <option selected="selected">Select stoke</option>
-                                    <option value='Yes' <?php
-                                    if (($prod->stoke) == "Yes") {
-                                        echo'selected';
-                                    }
-                                    ?>>Yes</option>
-                                    <option value='No' <?php
-                                    if (($prod->stoke) == "No") {
-                                        echo'selected';
-                                    }
-                                    ?>>No</option>
-                                </select>
-                            </div>
+                            
                             <div class="form-group">
                                 <?php echo $prod->estado ?>
                                 <label>State </label>
@@ -112,32 +93,12 @@
                                     <?php endforeach; ?> 
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="state">Weight</label>
-                                <input name="peso" type="text" id="peso" class="form-control" placeholder="Enter the product weight" required="" title="You need rewrite a product weight" value="<?php echo $prod->peso ?>" required=""/>
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="state">Description</label>
                                 <textarea name="descripcion" type="text" class="form-control" id="descripcion" placeholder="Enter the product description" title="You need rewrite a product description"><?php echo $prod->descripcion ?></textarea>
                             </div>
-                            <div class="form-group">
-                                <?php
-                                if ($prod->foto_small != ""):?>
-                                <div>
-                                    <?php echo 'You already have a preset image, leave the field empty to leave the current default.';
-                                    ?>   
-                                </div> 
-                                
-                                </br>
-                                    <label>Select Photo</label>
-                                <span class="btn btn-default btn-file">
-                                    Browse <input type="file" name="userfile" id="userfile" >
-                                </span>
-
-                                <?php endif; ?>
-                                
-                            </div>
-
+                            
                             <!--campo seguridad-->
                             <input type="hidden" name="login" value="ok">
                             <!--boton registrarse-->

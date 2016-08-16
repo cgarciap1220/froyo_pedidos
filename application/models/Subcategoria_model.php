@@ -1,11 +1,11 @@
 <?php
 class Subcategoria_model extends CI_Model
 {
-    public function __construct() 
+    public function __construct()
     {
         parent::__construct();
     }
-    
+
     function obtener_categorias()
     {
         $this->db->order_by('categoria','asc');
@@ -21,7 +21,7 @@ class Subcategoria_model extends CI_Model
 
     public function procesa_categoria_subcategoria($data)
     {
-    
+
     $this->db->where('categoria_id', $data['categoria_id']);
     $this->db->where('subcategoria', $data['subcategoria']);
     $query = $this->db->get('subcategoria');
@@ -32,7 +32,6 @@ class Subcategoria_model extends CI_Model
             return FALSE;
         }
 
-    
     }
 
     public function subcategoria($id)
@@ -47,8 +46,28 @@ class Subcategoria_model extends CI_Model
         }
     }
 
-    
-    
-    
- 
+   public function editar_subcategorias($id)
+    {
+        $this->db->where('id_subcategoria', $id);
+        $query = $this->db->get('subcategoria');
+
+        if ($query->num_rows() == 1) {
+            return $query->result();
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function modificar_subcategorias($id,$data)
+    {
+        $this->db->where('id_subcategoria',$id);
+        return $this->db->update('subcategoria',$data);
+    }
+
+    public function eliminar_subcategoria($id)
+    {
+         $this->db->where('id_subcategoria',$id);
+         return $this->db->delete('subcategoria');
+    }
+
 }

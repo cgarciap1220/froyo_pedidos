@@ -34,14 +34,14 @@
                             </select>
 
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="empresa">Stoke</label>
                             <select class="form-control" name="stoke" id="stoke" required="">
                                 <option selected="selected">Select stoke</option>
                                 <option>Yes</option>
                                 <option>No</option>
                             </select>
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <label>State </label>
                             <select name="estado" id="estado" class="form-control" required="">
@@ -73,28 +73,10 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="state">Weight</label>
-                            <input name="peso" type="text" id="peso" class="form-control" placeholder="Enter the product weight" required="" title="You need rewrite a product weight" required=""/>
-                        </div>
-                        <div class="form-group">
+                       <div class="form-group">
                             <label for="state">Description</label>
                             <textarea name="descripcion" type="text" class="form-control" id="descripcion" placeholder="Enter the product description" title="You need rewrite a product description"></textarea>
                         </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                                <input type="text" class="form-control" readonly="" name="userfile" id="userfile" required="">
-                                <label class="input-group-btn">
-                                    <span class="btn btn-default">
-                                        Browse… <input type="file" style="display: none;" multiple=multiple"" name="userfile" id="userfile">
-                                    </span>
-                                </label>
-                            </div>
-
-                            <!-- <label>Select Photo</label>
-                            <input name="userfile" type="file" id="userfile" class="form-control" />-->
-                        </div>
-
                         <!--campo seguridad-->
                         <input type="hidden" name="login" value="ok">
                         <!--boton registrarse-->

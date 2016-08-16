@@ -59,8 +59,9 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.app.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/isotope/dist/isotope.pkgd.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/miscripts.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/validaciones.js"></script>
 
-<script src="<?php echo base_url(); ?>assets/plugins/bootstrap-filestyle/src/bootstrap-filestyle.min.js"></script>
 <!-- Sweet-Alert  -->
 <script src="<?php echo base_url(); ?>assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/pages/jquery.sweet-alert.init.js"></script>

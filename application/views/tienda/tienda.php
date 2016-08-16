@@ -14,26 +14,22 @@
                 <?php
                 $cont = 1;
                 for ($i = 0; $i < 8; $i++) {
-                    
                     ?>
                     <div class="col-sm-6 col-lg-3 col-md-4 other">
                         <div class="product-list-box thumb">
                             <a href="" class="image-popup" title="Screenshot-1">
-                                <img src="<?php echo base_url(); ?>assets/images/products/big/<?php echo $cont?>.jpg" class="thumb-img" alt="work-thumbnail">
+                                <img src="<?php echo base_url(); ?>assets/images/products/big/<?php echo $cont ?>.jpg" class="thumb-img" alt="work-thumbnail">
                             </a>
 
                             <div class="product-action">
                                 <!--<a href="#" class="btn btn-success btn-sm"><i class="md md-add-shopping-cart"></i></a>-->
-                                
                             </div>
 
                             <div class="detail">
-                                <h4 class="m-t-0 m-b-5"><a href="" class="text-dark">Product</a></h4>
+                                <h4 class="m-t-0 m-b-5"><a href="" class="text-dark" style="text-align: center"><?php echo $productos[$i]['nombre_producto'] ?></a></h4>
                                 <div class="rating">
-
                                 </div>
-                                <h5 class="m-0"><span class="text-custom">$ 125</span> <span class="text-muted m-l-15"> Stock </span></h5>
-
+                                <!--<h5 class="m-0"><span class="text-custom">$ 125</span> <span class="text-muted m-l-15"> Stock </span></h5>-->
                             </div>
                         </div>
                     </div>
@@ -50,12 +46,12 @@
                     <div class="col-sm-6 col-lg-3 col-md-4 other">
                         <div class="product-list-box thumb">
                             <a href="#" class="image-popup" title="Screenshot-1">
-                                <img src="<?php echo base_url(); ?>assets/images/products/big/<?php echo $cont?>.jpg" class="thumb-img" alt="work-thumbnail">
+                                <img src="<?php echo base_url(); ?>assets/images/products/big/<?php echo $cont ?>.jpg" class="thumb-img" alt="work-thumbnail">
                             </a>
 
                             <div class="product-action">
                                 <!--<a href="#" class="btn btn-success btn-sm"><i class="md md-add-shopping-cart"></i></a>-->
-                                
+
                             </div>
 
                             <div class="detail">

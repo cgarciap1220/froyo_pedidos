@@ -7,29 +7,43 @@ class Usuario_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function procesa_insertar($data){
-	
-	$this->db->where('correo', $data['correo']);
-	$query = $this->db->get('usuario');
+	public function procesa_insertar($data)
+	{
+		$this->db->where('correo', $data['correo']);
+		$query = $this->db->get('usuario');
 
-		if ($query->num_rows() == 0) {
-			return $this->db->insert('usuario',$data);
-		}else{
-			return FALSE;
-		}
+			if ($query->num_rows() == 0) {
+				return $this->db->insert('usuario',$data);
+			}else{
+				return FALSE;
+			}
 
 	}
 
-	public function procesa_busqueda_usuarios($data)
+	public function procesa_busqueda_usuarios($tipo_usuario)
 	{
 
-		if ($data['tipo_usuario'] == 5) {
+		if ($tipo_usuario == 5) {
 			$this->db->where('rol_id', 5);
 		}else{
 			$this->db->where('rol_id !=', 5);
 		}
 
 		$query = $this->db->get('usuario');
+		return $query->num_rows();
+		
+	}
+        
+        public function procesa_busqueda_usuarios_row($limit,$offset,$tipo_usuario)
+	{
+
+		if ($tipo_usuario == 5) {
+			$this->db->where('rol_id', 5);
+		}else{
+			$this->db->where('rol_id !=', 5);
+		}
+
+		$query = $this->db->get('usuario',$limit,$offset);
 		
 		if($query->num_rows() == 0){
 			return FALSE;

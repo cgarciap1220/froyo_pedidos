@@ -30,10 +30,6 @@ class Productos_model extends CI_Model {
     
     function seleccionar_productos_all()
     {
-        /*$this->db->select('producto.*, categoria.categoria, subcategoria.subcategoria');
-        $this->db->join('categoria','producto.categoria_id = categoria.id_categoria');
-        $this->db->join('subcategoria','producto.subcategoria_id = subcategoria.id_subcategoria', 'right');
-        $query = $this->db->get('producto');*/
         $sql = "SELECT producto.*, categoria.categoria, subcategoria.subcategoria FROM producto
                 INNER JOIN categoria ON producto.categoria_id = categoria.id_categoria 
                 LEFT JOIN subcategoria ON producto.subcategoria_id = subcategoria.id_subcategoria";
@@ -87,6 +83,15 @@ class Productos_model extends CI_Model {
         $query = $this->db->get('categoria');
         if( $query->num_rows() > 0)
             return $query->result();
+        else
+            return FALSE;
+    }
+    
+    function tienda()
+    {
+        $query = $this->db->get('producto');
+        if( $query->num_rows() > 0)
+            return $query->result_array();
         else
             return FALSE;
     }

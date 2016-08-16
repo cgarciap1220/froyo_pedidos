@@ -80,38 +80,13 @@ class Productos_controller extends CI_Controller
     {
         $nombre_producto = $this->security->xss_clean(strip_tags($this->input->post('nombre_producto')));
         $nivel_ventas = $this->security->xss_clean(strip_tags($this->input->post('nivel_ventas')));
-        $stoke = $this->security->xss_clean(strip_tags($this->input->post('stoke')));
         $estado = $this->security->xss_clean(strip_tags($this->input->post('estado')));
         $categoria = $this->security->xss_clean(strip_tags($this->input->post('categoria')));
         $subcategoria = $this->security->xss_clean(strip_tags($this->input->post('subcategoria')));
-        $peso = $this->security->xss_clean(strip_tags($this->input->post('peso')));
+        $descripcion = $this->security->xss_clean(strip_tags($this->input->post('descripcion')));
         $fecha_creacion = date('Y-m-d');
         date_default_timezone_set("America/Guatemala");
         $hora_creacion = date('g:i:s a', time() - 3600 * date('I'));
-        $descripcion = $this->security->xss_clean(strip_tags($this->input->post('descripcion')));
-        //GARGAR IMAGEN
-        $this->load->helper('text_helper');
-        $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
-        //$nombre_imagen = $this->security->xss_clean(strip_tags($this->input->post('userfile')));
-        $nombre_modificado = str_replace('jpg','',$nombre_imagen);
-        $nombre_modificado .= '.jpg';
-        $config['max_size'] = 6000;
-        $config['quality'] = '90%';
-        $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $config['file_name'] = $nombre_modificado;
-        $this->load->library('upload',$config);
-        $this->upload->do_upload();
-        //PROCESAR IMAGEN
-        $config2['source_image'] = './uploads/'.$nombre_modificado;
-        $config2['width'] = 800;
-        $config2['height'] = 600;
-        $this->load->library('image_lib',$config2);
-        if(!$this->image_lib->resize())
-        {
-            echo $this->image_lib->display_errors();
-        }
-        $foto = 'uploads/'.$nombre_modificado;
         if($nivel_ventas == "Select level")
         {
             $nivel_ventas = null;
@@ -120,11 +95,7 @@ class Productos_controller extends CI_Controller
         {
             $estado = null;
         }
-        if($stoke == "Select stoke")
-        {
-            $stoke = null;
-        }
-        if($categoria == "Select category")
+       if($categoria == "Select category")
         {
             $categoria = null;
         }
@@ -132,19 +103,14 @@ class Productos_controller extends CI_Controller
         {
             $subcategoria = null;
         }
-        
-        if(($nombre_producto != "")&&($nivel_ventas != "")&&($categoria != NULL)&&($estado != NULL)&&($stoke != NULL)&&($foto != "") && ($peso !=""))
+        //$foto = 'assets/images/'.$nombre_modificado;
+        if(($nombre_producto != "")&&($nivel_ventas != "Select level")&&($categoria != "Select category")&&($subcategoria != "Select subcategory")&&($estado != ""))
         {
             $data = array('nombre_producto'=>$nombre_producto,
                         'nivel_ventas'=>$nivel_ventas = $nivel_ventas,
-                        'foto_small' => $foto,
-                        'foto_media' => $foto,
-                        'foto_big' => $foto,
-                        'stoke' => $stoke,
                         'estado' =>  $estado,
                         'categoria_id' => $categoria,
                         'subcategoria_id' =>  $subcategoria,
-                        'peso' => $peso,
                         'fecha_creacion' => $fecha_creacion,
                         'hora_creacion' => $hora_creacion,
                         'descripcion' => $descripcion,
@@ -162,6 +128,11 @@ class Productos_controller extends CI_Controller
                 $this->session->set_flashdata('error','No correctly added the product');
                 redirect('Productos_controller/pagina_agregar_producto','refresh');
             }
+        }
+        else
+        {
+            $this->session->set_flashdata('error','There are empty fields, please check your information.');
+            redirect('Productos_controller/pagina_agregar_producto', 'refresh');
         }
     }
         
@@ -200,20 +171,13 @@ class Productos_controller extends CI_Controller
     {
         $this->load->helper('text_helper');
         $codigo_producto = $this->uri->segment('3');
-        //$codigo_producto = $this->input->post('codigo_producto');
         $nombre_producto = $this->security->xss_clean(strip_tags($this->input->post('nombre_producto')));
         $nivel_ventas = $this->security->xss_clean(strip_tags($this->input->post('nivel_ventas')));
-        $stoke = $this->security->xss_clean(strip_tags($this->input->post('stoke')));
         $estado = $this->security->xss_clean(strip_tags($this->input->post('estado')));
         $categoria = $this->security->xss_clean(strip_tags($this->input->post('categoria')));
         $subcategoria = $this->security->xss_clean(strip_tags($this->input->post('subcategoria')));
-        $peso = $this->security->xss_clean(strip_tags($this->input->post('peso')));
-        /*$fecha_creacion = date('Y-m-d');
-        date_default_timezone_set("America/Guatemala");
-        $hora_creacion = date('g:i:s a', time() - 3600 * date('I'));*/
         $descripcion = $this->security->xss_clean(strip_tags($this->input->post('descripcion')));
-        //$imagen = $this->input->post('userfile');
-        $nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
+        
         if($nivel_ventas == "Select level")
         {
             $nivel_ventas = null;
@@ -222,11 +186,7 @@ class Productos_controller extends CI_Controller
         {
             $estado = null;
         }
-        if($stoke == "Select stoke")
-        {
-            $stoke = null;
-        }
-        if($categoria == "Select category")
+       if($categoria == "Select category")
         {
             $categoria = null;
         }
@@ -235,56 +195,14 @@ class Productos_controller extends CI_Controller
             $subcategoria = null;
         }
         //$foto = 'assets/images/'.$nombre_modificado;
-        if(($nombre_producto != "")&&($nivel_ventas != "Select level")&&($categoria != "")&&($estado != "")&&($stoke != "") && ($peso !=""))
+        if(($nombre_producto != "")&&($nivel_ventas != "Select level")&&($categoria != "Select category")&&($subcategoria != "Select subcategory")&&($estado != ""))
         {
-            if($nombre_imagen != "")
-            {
-                //$nombre_imagen = url_title(convert_accented_characters($_FILES['userfile']['name']),'_',true);
-                $nombre_modificado = str_replace('jpg','',$nombre_imagen);
-                $nombre_modificado .= '.jpg';
-                $config['max_size'] = 6000;
-                $config['quality'] = '90%';
-                $config['upload_path'] = './uploads/';
-                $config['allowed_types'] = 'gif|jpg|jpeg|png';
-                $config['file_name'] = $nombre_modificado;
-                $this->load->library('upload',$config);
-                $this->upload->do_upload();
-                //PROCESAR IMAGEN
-                $config2['source_image'] = './uploads/'.$nombre_modificado;
-                $config2['width'] = 800;
-                $config2['height'] = 600;
-                $this->load->library('image_lib',$config2);
-                if(!$this->image_lib->resize())
-                {
-                    echo $this->image_lib->display_errors();
-                }
-                $foto = 'uploads/'.$nombre_modificado;
-               
-                $data = array('nombre_producto'=>$nombre_producto,
-                        'nivel_ventas'=>$nivel_ventas = $nivel_ventas,
-                        'stoke' => $stoke,
-                        'estado' =>  $estado,
-                        'categoria_id' => $categoria,
-                        'subcategoria_id' =>  $subcategoria,
-                        'peso' => $peso,
-                        'descripcion' => $descripcion,
-                        'foto_small' => $foto,
-                        'foto_media' => $foto,
-                        'foto_big' => $foto,
-                );
-               $actualizar = $this->Productos_model->modificar_producto($codigo_producto,$data);
-            }
-            else
-            {
-                $data = array('nombre_producto'=>$nombre_producto,
+            $data = array('nombre_producto'=>$nombre_producto,
                             'nivel_ventas'=>$nivel_ventas,
-                            'stoke' => $stoke,
                             'estado' =>  $estado,
                             'categoria_id' => $categoria,
                             'subcategoria_id' =>  $subcategoria,
-                            'peso' => $peso,
                             'descripcion' => $descripcion,
-
                         );
                 $actualizar = $this->Productos_model->modificar_producto($codigo_producto,$data);
             }
@@ -298,7 +216,7 @@ class Productos_controller extends CI_Controller
                 $this->session->set_flashdata('error','Not properly update the product');
                 $this->pagina_modificar_producto($codigo_producto);
             }
-        }
+       
     }
         
     function eliminar_producto() 

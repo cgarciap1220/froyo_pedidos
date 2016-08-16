@@ -2,9 +2,9 @@
     var url = <?php echo json_encode(base_url(), JSON_HEX_TAG); ?>;
 </script>
 <script>
-   /* window.onload = function () {
+    window.onload = function () {
         loadCaracteristicas();
-    }*/
+    }
 </script>
 <div class="panel panel-default">
     <div class="panel-heading"><?php echo $titulo; ?></div>
@@ -14,7 +14,7 @@
             <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Product Features</a></li>
         </ul>
         <!-- inicio formulario -->
-        <form action="<?php echo base_url() ?>Caracteristicas_controller/agregar_producto_caracteristicas" method="POST" enctype="multipart/form-data" id="insertar_caracteristicas">
+        <form action="<?php echo base_url()?>/caracteristicas_controller/agregar_producto_caracteristicas/" method="POST" enctype="multipart/form-data" id="insertar_caracteristicas">
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="category" enctype="multipart/form-data">
@@ -88,7 +88,7 @@
                             <input type="text" class="form-control" readonly="" name="userfile" id="userfile" required="">
                             <label class="input-group-btn">
                                 <span class="btn btn-default">
-                                    Browse… <input type="file" style="display: none;" multiple=multiple"">
+                                    Browse… <input type="file" style="display: none;" multiple=multiple"" name="userfile" id="userfile">
                                 </span>
                             </label>
                         </div>

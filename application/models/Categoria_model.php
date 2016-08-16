@@ -9,7 +9,7 @@ class Categoria_model extends CI_Model
     // funcion para insertar categoria, verifica que no se repita 
     public function procesa_categoria_insertar($data)
     {
-    
+
     $this->db->where('categoria', $data['categoria']);
     $query = $this->db->get('categoria');
 
@@ -25,7 +25,7 @@ class Categoria_model extends CI_Model
     {
         $this->db->order_by('categoria','asc');
         $query = $this->db->get('categoria');
-        
+
         if($query->num_rows() == 0){
             return FALSE;
         }else{
@@ -57,8 +57,6 @@ class Categoria_model extends CI_Model
      public function eliminar_categoria($id)
     {
          $this->db->where('id_categoria',$id);
-         return $this->db->delete('categoria');   
+         return $this->db->delete('categoria');
     }
-    
-    
 }
