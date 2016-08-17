@@ -6,10 +6,10 @@ class Subcategoria_model extends CI_Model
         parent::__construct();
     }
 
-    function obtener_categorias()
+    function obtener_categorias($limit,$offset)
     {
         $this->db->order_by('categoria','asc');
-        $query = $this->db->get('categoria');
+        $query = $this->db->get('categoria',$limit,$offset);
         if( $query->num_rows() > 0){
             return $query->result();
         }
@@ -18,6 +18,11 @@ class Subcategoria_model extends CI_Model
         }
     }
 
+    public function obtener_cant_registros_subcategorias()
+    {
+        $query = $this->db->get('categoria');
+        return $query->num_rows();
+    }
 
     public function procesa_categoria_subcategoria($data)
     {

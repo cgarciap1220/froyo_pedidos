@@ -63,6 +63,14 @@
                 }
 
              ?>
+                            <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate" style="text-align: center">
+                    <ul class="pagination" >
+                        <?php
+                        /* Se imprimen los números de página */
+                        echo $this->pagination->create_links();
+                        ?>
+                    </ul>
+                </div>
         </div>
     </div>
 
