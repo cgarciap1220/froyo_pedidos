@@ -13,8 +13,9 @@ class Usuario_controller extends CI_Controller
     { 
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
             $info['titulo'] = "Add User";
+            $data['ciudad'] = $this->Usuario_model->obtener_ciudades();
             $this->load->view('tema/header',$info);
-            $this->load->view('usuarios/registrar_usuarios');
+            $this->load->view('usuarios/registrar_usuarios',$data);
             $this->load->view('tema/footer');
         }else{
             $this->session->set_flashdata('error','Login to access.');
@@ -98,37 +99,6 @@ class Usuario_controller extends CI_Controller
                 $this->mostrar_resultados_busqueda_usuarios();
         }
         
-        /*if (isset($data['tipo_usuario']) && $data['tipo_usuario'] !='') {
-
-            $query = $this->Usuario_model->procesa_busqueda_usuarios($data);
-
-            $info['titulo'] = 'List Users';
-
-            if(isset($query)){
-                    
-                if ($query == FALSE) {
-
-                    $data['vacio'] = 'No data to print';
-                            
-                    $this->load->view('tema/header',$info);
-                    $this->load->view('usuarios/listar_usuarios',$data);
-                    $this->load->view('tema/footer');
-                            
-                }else{
-
-                    $data['query'] = $query;
-
-                    $this->load->view('tema/header',$info);
-                    $this->load->view('usuarios/listar_usuarios', $data);
-                    $this->load->view('tema/footer');    
-                }
-            }else{
-                $this->session->set_flashdata('correcto',' Empty input .');
-                redirect('Usuario_controller/listar_usuario', 'refresh');
-            }
-        }*/
-
-     
     }
     
     function mostrar_resultados_busqueda_usuarios()
@@ -204,7 +174,7 @@ class Usuario_controller extends CI_Controller
             $info['titulo'] = "Update User";
             $id = $this->uri->segment(3); 
             $query = $this->Usuario_model->editar_usuario($id);
-
+            $data['ciudad'] = $this->Usuario_model->obtener_ciudades();
             if (isset($query)) {
                 if ($query != FALSE) {
                     $data['query'] = $query;

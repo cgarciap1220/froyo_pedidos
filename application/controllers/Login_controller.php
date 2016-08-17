@@ -37,7 +37,6 @@ class Login_controller extends CI_Controller {
 						$data['compannia'] =  $key->compannia;
 						$data['zipcode'] =  $key->zipcode;
 						$data['ciudad'] =  $key->ciudad;
-						$data['abbr'] =  $key->abbr;
 						$data['estado'] =  $key->estado;
 						$data['direccion'] =  $key->direccion;
 						$data['rol_id'] =  $key->rol_id;

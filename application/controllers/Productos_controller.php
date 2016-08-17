@@ -26,11 +26,38 @@ class Productos_controller extends CI_Controller
     {   
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) 
         {    
-            $productos = $this->Productos_model->seleccionar_productos_all();
+            $limit = 10;
+            $offset = ($this->uri->segment(3) != '' ? $this->uri->segment(3):0);
+            /* URL a la que se desea agregar la paginación*/
+            $config['base_url'] = base_url().'Productos_controller/mostrar_productos/';
+            /*Obtiene el total de registros a paginar */
+            $config['total_rows'] = $this->Productos_model->obtener_cant_registros_productos();
+            /*Obtiene el numero de registros a mostrar por pagina */
+             $config['per_page'] = $limit;
+             $config['num_links'] = 20;
+            /*Indica que segmento de la URL tiene la paginación, por default es 3*/
+            $config['uri_segment'] = '3';
+            /*Se personaliza la paginación para que se adapte a bootstrap*/
+            $config['cur_tag_open'] = '<li class="active"><a href="#">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            $config['first_link'] = 'First';//primer link
+            $config['last_link'] = 'Last';//último link
+            $config['next_link'] = 'Next';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = 'Back';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+            /* Se inicializa la paginacion*/
+            $this->pagination->initialize($config);
+            
+            $productos = $this->Productos_model->seleccionar_productos_all($limit,$offset);
         
             if($productos != False)
             {
-                $data['valor'] = true;
+                
                 $data['productos'] = $productos;
                 $info['titulo'] = "List Product";
                 $this->load->view('tema/header',$info);

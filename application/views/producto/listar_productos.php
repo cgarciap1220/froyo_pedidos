@@ -21,79 +21,40 @@
                     </tr>
 
                     <?php foreach ($productos as $prod): ?>
-                    <tr>
-                        <td><?php echo $prod->nombre_producto; ?></td>
-                        <td><?php echo $prod->categoria; ?></td>
-                        <td><?php echo $prod->subcategoria; ?></td>
-                        <td><?php echo $prod->nivel_ventas; ?></td>
-                        <td><?php echo $prod->descripcion; ?></td>
-                        <td class="text-center">
-                            <a href="<?php base_url() ?>/froyo_pedidos/Productos_controller/vista_modificar_producto/<?php echo $prod->codigo_producto; ?>">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="javascript:eliminar('<?php base_url() ?>/froyo_pedidos/Productos_controller/eliminar_producto/<?php echo $prod->codigo_producto; ?>')">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php
+                        <tr>
+                            <td><?php echo $prod->nombre_producto; ?></td>
+                            <td><?php echo $prod->categoria; ?></td>
+                            <td><?php echo $prod->subcategoria; ?></td>
+                            <td><?php echo $prod->nivel_ventas; ?></td>
+                            <td><?php echo $prod->descripcion; ?></td>
+                            <td class="text-center">
+                                <a href="<?php base_url() ?>/froyo_pedidos/Productos_controller/vista_modificar_producto/<?php echo $prod->codigo_producto; ?>">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="javascript:eliminar('<?php base_url() ?>/froyo_pedidos/Productos_controller/eliminar_producto/<?php echo $prod->codigo_producto; ?>')">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php
                     endforeach;
                     ?>
 
                 </table>
-                
-            </div>
-            <div class="row">
-
-                <div class="col-sm-6">
-                    <div class="dataTables_paginate paging_simple_numbers" id="datatable_paginate">
-                        <ul class="pagination">
-                            <!-- <li class="paginate_button previous disabled" aria-controls="datatable" tabindex="0" id="datatable_previous">
-                                 <a href="#">Previous</a>
-                             </li>
-                             <li class="paginate_button active" aria-controls="datatable" tabindex="0">
-                                 <a href="#">1</a>
-                             </li>
-                             <li class="paginate_button " aria-controls="datatable" tabindex="0">
-                                 <a href="#">2</a>
-                             </li>
-                             <li class="paginate_button " aria-controls="datatable" tabindex="0">
-                                 <a href="#">3</a>
-                             </li>
-                             <li class="paginate_button " aria-controls="datatable" tabindex="0">
-                                 <a href="#">4</a>
-                             </li>
-                             <li class="paginate_button " aria-controls="datatable" tabindex="0">
-                                 <a href="#">5</a>
-                             </li>
-                             <li class="paginate_button " aria-controls="datatable" tabindex="0">
-                                 <a href="#">6</a>
-                             </li>
-                             <li class="paginate_button next" aria-controls="datatable" tabindex="0" id="datatable_next">
-                                 <a href="#">Next</a>
-                             </li>-->
-
-                            <?php
-                            /* Se imprimen los números de página */
-                            echo $this->pagination->create_links();
-                            ?>
-                        </ul>
-                    </div>
-                </div>
+                <div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate" style="text-align: center">
+                    <ul class="pagination" >
+                        <?php
+                        /* Se imprimen los números de página */
+                        echo $this->pagination->create_links();
+                        ?>
+                    </ul>
+                </div>  
             </div>
 
-            <div class="row">
 
-                <div class="col-lg-6">
-                    <div class="dataTables_paginate paging_simple_numbers" id="datatable-keytable_paginate">
-                        <ul>
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
 
 

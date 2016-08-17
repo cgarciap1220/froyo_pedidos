@@ -75,5 +75,11 @@ class Usuario_model extends CI_Model {
     	 return $this->db->delete('usuario');	
     }
 
+    //funcion para obtener los registros de la tba ciudad y mostrarlos en el select
+    public function obtener_ciudades()
+    {
+        $query = $this->db->get('ciudad');
+        return $query->result();
+    }
 
 }

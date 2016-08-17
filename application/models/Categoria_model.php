@@ -21,10 +21,10 @@ class Categoria_model extends CI_Model
 
     }
     // funcion para listar categorias , verifica que haya contenido
-    public function listar_categorias()
+    public function listar_categorias($limit,$offset)
     {
         $this->db->order_by('categoria','asc');
-        $query = $this->db->get('categoria');
+        $query = $this->db->get('categoria',$limit,$offset);
 
         if($query->num_rows() == 0){
             return FALSE;
@@ -32,6 +32,13 @@ class Categoria_model extends CI_Model
             return $query->result();
         }
 
+    }
+    
+    public function obtener_cant_registros_categoria() 
+    {
+       $query = $this->db->get('categoria');
+       return $query->num_rows();
+        
     }
 
     //funcion para cargar la vista del formulario de categoria, con el registro solicitado

@@ -14,7 +14,7 @@
             <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Product Features</a></li>
         </ul>
         <!-- inicio formulario -->
-        <form action="<?php echo base_url()?>/caracteristicas_controller/agregar_producto_caracteristicas/" method="POST" enctype="multipart/form-data" id="insertar_caracteristicas">
+        <form action="<?php echo base_url()?>/caracteristicas_controller/agregar_producto_caracteristicas_varios/" method="POST" enctype="multipart/form-data" id="insertar_caracteristicas">
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="category" enctype="multipart/form-data">
@@ -99,7 +99,7 @@
                         <!--campo seguridad-->
                         <input type="hidden" name="login" value="ok">
                         <!--boton registrarse-->
-                        <input type="submit" class="btn btn-primary" value="Add Product" onclick="return confirmCaracteristicas();">
+                        <input type="submit" class="btn btn-primary" value="Add Product Features" onclick="return confirmCaracteristicas();">
                     </div>
                 </div>
             </div>  

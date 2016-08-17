@@ -28,11 +28,12 @@ class Productos_model extends CI_Model {
         return $this->db->insert_id();
     }
     
-    function seleccionar_productos_all()
+    function seleccionar_productos_all($limit,$offset)
     {
         $sql = "SELECT producto.*, categoria.categoria, subcategoria.subcategoria FROM producto
                 INNER JOIN categoria ON producto.categoria_id = categoria.id_categoria 
-                LEFT JOIN subcategoria ON producto.subcategoria_id = subcategoria.id_subcategoria";
+                LEFT JOIN subcategoria ON producto.subcategoria_id = subcategoria.id_subcategoria 
+                limit {$limit} offset {$offset}";
         $query = $this->db->query($sql);
         if( $query->num_rows() > 0)
             return $query->result();
@@ -40,6 +41,15 @@ class Productos_model extends CI_Model {
             return FALSE;
     }
     
+    function obtener_cant_registros_productos()
+    {
+        $sql = "SELECT producto.*, categoria.categoria, subcategoria.subcategoria FROM producto
+                INNER JOIN categoria ON producto.categoria_id = categoria.id_categoria 
+                LEFT JOIN subcategoria ON producto.subcategoria_id = subcategoria.id_subcategoria";
+        $query = $this->db->query($sql);
+        return $query->num_rows();
+    }
+            
     function seleccionar_producto_id($id)
     {
         $this->db->where('codigo_producto',$id);

@@ -6,17 +6,11 @@
             <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Driver</a></li>
         </ul>
         <!-- inicio formulario -->
-        <form action="<?php echo base_url() ?>Camion_controller/agregar_camion" method="POST">
+        <form action="<?php echo base_url() ?>Chofer_controller/agregar_chofer" method="POST">
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="category">
                     <div class="contenedor-formulario">
-                        <!--codigo_producto-->
-                        <!--<div class="form-group">
-                            <label for="state">Product code</label>
-                            <input name="codigo_producto" type="text" class="form-control" id="codigo_producto" placeholder="Enter the product code" required="" title="You need rewrite a product code">
-                        </div>-->
-                        <!--nombre_producto-->
 
                         <div class="form-group">
                             <label for="nombre">Driver name</label>

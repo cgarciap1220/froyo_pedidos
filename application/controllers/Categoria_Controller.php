@@ -53,8 +53,35 @@ class Categoria_Controller extends CI_Controller
     function listar_categorias()
     {
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
-
-            $query = $this->Categoria_model->listar_categorias();
+            
+            $limit = 10;
+            $offset = ($this->uri->segment(3) != '' ? $this->uri->segment(3):0);
+            /* URL a la que se desea agregar la paginación*/
+            $config['base_url'] = base_url().'Categoria_Controller/listar_categorias/';
+            /*Obtiene el total de registros a paginar */
+            $config['total_rows'] = $this->Categoria_model->obtener_cant_registros_categoria();
+            /*Obtiene el numero de registros a mostrar por pagina */
+             $config['per_page'] = $limit;
+             $config['num_links'] = 20;
+            /*Indica que segmento de la URL tiene la paginación, por default es 3*/
+            $config['uri_segment'] = '3';
+            /*Se personaliza la paginación para que se adapte a bootstrap*/
+            $config['cur_tag_open'] = '<li class="active"><a href="#">';
+            $config['cur_tag_close'] = '</a></li>';
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';
+            $config['first_link'] = '<button class="btn btn-white btn-sm" type="button">First</button>';//primer link
+            $config['last_link'] = '<button class="btn btn-white btn-sm" type="button">Last</button>';//último link
+            $config['next_link'] = 'Next';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';
+            $config['prev_link'] = 'Back';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+            /* Se inicializa la paginacion*/
+            $this->pagination->initialize($config);
+            
+            $query = $this->Categoria_model->listar_categorias($limit,$offset);
 
             $info['titulo'] = 'List Category';
 
