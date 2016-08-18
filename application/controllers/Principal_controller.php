@@ -13,7 +13,7 @@
 		public function principal()
 		{
 			
-			$info['titulo'] = 'Froyo Sistem Order';
+			$info['titulo'] = 'Froyo Orders System';
 				
 			$this->load->view('tema/header', $info);
 			$this->load->view('principal/principal');

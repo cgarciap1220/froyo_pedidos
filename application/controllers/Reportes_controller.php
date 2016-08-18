@@ -8,7 +8,8 @@ class Reportes_controller extends CI_Controller
 
     function listar_reportes()
     { 
-        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
+        if($this->session->userdata('correo') && (($this->session->userdata('rol_id') == 1)||($this->session->userdata('rol_id') == 4)||($this->session->userdata('rol_id') == 2))) 
+            {
 
             $info['titulo'] = "Show Category";
 

@@ -14,7 +14,7 @@
                                         <a href="#">Help</a>
                                     </li>
                                     <li>
-                                        <a href="#">Contact</a>
+                                        <a href="<?php echo base_url();?>Contacto_controller/contacto">Contact</a>
                                     </li>
                                 </ul>
                             </div>

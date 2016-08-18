@@ -21,11 +21,17 @@ class Tienda_controller extends CI_Controller
     
     function tienda()
     {
-        $info['titulo'] = "Store";
-        $productos = $this->Productos_model->tienda();
-        $datos['productos'] = $productos;
-        $this->load->view('tema/header',$info);
-        $this->load->view('tienda/tienda',$datos);
-        $this->load->view('tema/footer');
+         if($this->session->userdata('correo') && (($this->session->userdata('rol_id') == 1)||($this->session->userdata('rol_id') == 2) ||($this->session->userdata('rol_id') == 5))) 
+        {
+            $info['titulo'] = "Store";
+            $productos = $this->Productos_model->tienda();
+            $datos['productos'] = $productos;
+            $this->load->view('tema/header',$info);
+            $this->load->view('tienda/tienda',$datos);
+            $this->load->view('tema/footer');
+        }else{
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        }    
     }
 }

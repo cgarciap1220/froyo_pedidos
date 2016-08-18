@@ -2,6 +2,7 @@
   <div class="panel-heading"><?php echo $titulo;?></div>
   <div class="panel-body">
     <!-- Nav tabs -->
+    <p><strong>Fill in the password field with the current password or a new one</strong></p>
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">User</a></li>
         <li role="presentation"><a href="#company" aria-controls="company" role="tab" data-toggle="tab">Company</a></li>
@@ -12,6 +13,7 @@
   	<?php 	
   		foreach ($query as $key ) {
     ?>
+        
               <!-- Tab panes -->
       <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="user">
@@ -24,7 +26,7 @@
                     <!--Contrasena-->
                     <div class="form-group">
                         <label for="empresa">Password</label>
-                        <input name="clave" type="password" class="form-control" id="clave" placeholder="Enter your password"  title="You need rewrite your password" value="">
+                        <input name="clave" type="password" class="form-control" id="clave" placeholder="Enter your password is required"  title="You need rewrite your password" value="" required="">
                     </div>
                     <!--statado-->
                         <div class="form-group">

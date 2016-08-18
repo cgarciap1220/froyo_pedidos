@@ -114,29 +114,37 @@ $(document).ready(function () {
 function confirmCaracteristicas()
 {
     swal({
-              title: 'Are you sure?',
-              text: "To add more presentations this product?",
-              type: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, I want',
-              closeOnConfirm: false,
-              closeOnCancel: false
-        },
-                function (isConfirm)
-                {
-                        if (!isConfirm) {
-                               
-                                $.ajax({
-                                url: "<?php echo base_url(); ?>" + "/caracteristicas_controller/agregar_producto_caracteristicas/" ,
-                                //url: "obtener_municipio_dpto/" + dptoId,
-                                type: "POST"
+    title: "Are you sure?",
+    text: "To add more presentations this product?",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonClass: "btn-primary",
+    confirmButtonText: "Yes",
+    cancelButtonText: "No",
+    closeOnConfirm: false,
+    closeOnCancel: false
+  },
+  function(isConfirm) {
+    if (isConfirm) {
+       // alert(isConfirm);
+        //var confirm = document.getElementById("codigo_producto").value;
+        var obj = {
+        confirm: isConfirm
 
-                    });
-                        }
-                }
-    );
+        };
+        sessionStorage.setItem('confirmacion', JSON.stringify(obj));
+       
+         swal("Deleted!", "Your imaginary file has been deleted.", "success");
+    } else {
+       var obj = {
+        confirm: isConfirm
+
+        };
+        sessionStorage.setItem('confirmacion', JSON.stringify(obj));
+      swal("Cancelled", "Your imaginary file is safe :)", "error");
+    }
+  });
+    
 }
 
 /*function confirmCaracteristicas()
@@ -171,10 +179,10 @@ function confirmCaracteristicas()
  }
  }*/
 
-/*function loadCaracteristicas() {
- var caratprod = JSON.parse(sessionStorage.caratprod);
- if (caratprod != null) {
- document.getElementById("codigo_producto").value = caratprod.codigo_producto;
- sessionStorage.setItem('caratprod', null);
+function loadConfirmacion() {
+ var confirmacion = JSON.parse(sessionStorage.confirmacion);
+ if (confirmacion != null) {
+ document.getElementById("confirmacion").value = confirmacion.confirm;
+ sessionStorage.setItem('confirmacion', null);
  }
- }*/
+ }

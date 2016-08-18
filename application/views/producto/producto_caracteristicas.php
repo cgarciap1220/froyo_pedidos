@@ -3,7 +3,7 @@
 </script>
 <script>
     window.onload = function () {
-        loadCaracteristicas();
+        loadConfirmacion();
     }
 </script>
 <div class="panel panel-default">
@@ -14,7 +14,7 @@
             <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Product Features</a></li>
         </ul>
         <!-- inicio formulario -->
-        <form action="<?php echo base_url()?>/caracteristicas_controller/agregar_producto_caracteristicas_varios/" method="POST" enctype="multipart/form-data" id="insertar_caracteristicas">
+        <form action="<?php echo base_url()?>/caracteristicas_controller/agregar_producto_caracteristicas" method="POST" enctype="multipart/form-data" id="insertar_caracteristicas">
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="category" enctype="multipart/form-data">
@@ -25,6 +25,7 @@
                             <input name="codigo_producto" type="text" class="form-control" id="codigo_producto" placeholder="Enter the product code" required="" title="You need rewrite a product code">
                         </div>-->
                         <!--nombre_producto-->
+                        <input type="text" name="confirmacion" id="confirmacion">
                         <div class="form-group">
                             <input name="codigo_producto" type="hidden" id="codigo_producto"  value="<?php echo $codigoproducto ?>"/>
                             <label>Product Code </label>

@@ -10,8 +10,8 @@
 
         <title><?php echo $titulo; ?></title>
 
-       <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
-        <link href="<?php echo base_url();?>assets/plugins/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
+        <link href="<?php echo base_url(); ?>assets/plugins/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/core.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/components.css" rel="stylesheet" type="text/css" />
@@ -54,8 +54,9 @@
                                     <span class="glyphicon  glyphicon-user" aria-hidden="true"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i>Update data</a></li>
-                                    <li><a href="<?php echo base_url();?>Login_controller/cerrar"><i class="ti-power-off m-r-5"></i> Logout</a></li>
+                                    <li><a href="<?php echo base_url(); ?>Usuario_controller/vista_modificar_usuario/<?php echo $this->session->userdata('id_usuario') ?>"><i class="ti-settings m-r-5"></i>Update data</a></li>
+                                    
+                                    <li><a href="<?php echo base_url(); ?>Login_controller/cerrar"><i class="ti-power-off m-r-5"></i> Logout</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown navbar-c-items">
@@ -185,86 +186,157 @@
                 <div class="container">
                     <div id="navigation">
                         <!-- Navigation Menu-->
+
                         <ul class="navigation-menu">
-                            <li class="has-submenu active">
-                                <a href="#"><i class="md  md-person"></i>User</a>
-                                <ul class="submenu">
-                                    <li class="active">
-                                        <a href="<?php echo base_url(); ?>Usuario_controller/vista_agregar_usuario">Add</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="<?php echo base_url(); ?>Usuario_controller/listar_usuarios">List</a>
-                                    </li>
+                            <?php
+                            $rol = $this->session->userdata('rol');
+                            if (($this->session->userdata('rol_id') == 1)) {
+                                ?>
+                                <li class="has-submenu active">
+                                    <a href="#"><i class="md  md-person"></i>User</a>
+                                    <ul class="submenu">
+                                        <li class="active">
+                                            <a href="<?php echo base_url(); ?>Usuario_controller/vista_agregar_usuario">Add</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="<?php echo base_url(); ?>Usuario_controller/listar_usuarios">List</a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="<?php echo base_url(); ?>Usuario_controller/listar_clientes">Customer List</a>
+                                        </li>
 
-                                </ul>
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#"><i class="md md-color-lens"></i>Category</a>
-                                <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Categoria_Controller/vista_agregar_categoria">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Categoria_Controller/listar_categorias">List</a></li>
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
+                            <?php } ?>
+                            <?php
+                            //$rol = $this->session->userdata('rol');
+                            if (($this->session->userdata('rol_id') == 2)) {
+                                ?>
+                                <li class="has-submenu active">
+                                    <a href="#"><i class="md  md-person"></i>User</a>
+                                    <ul class="submenu">
 
+                                        <li class="active">
+                                            <a href="<?php echo base_url(); ?>Usuario_controller/listar_clientes">Customer List</a>
+                                        </li>
 
-                            <li class="has-submenu">
-                                <a href="#"><i class="md md-layers"></i>Subcategory</a>
-                                <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Subcategoria_controller/vista_agregar_subcategoria">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Subcategoria_controller/listar_subcategorias">List</a></li>
-                                </ul> 
+                                    </ul>
+                                </li>
+                            <?php } ?>
+                            <?php
+                            if (($this->session->userdata('rol_id') == 1)) {
+                                ?>     
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md md-color-lens"></i>Category</a>
+                                    <ul class="submenu">
+                                        <li><a href="<?php echo base_url(); ?>Categoria_Controller/vista_agregar_categoria">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Categoria_Controller/listar_categorias">List</a></li>
+                                    </ul>
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1)) {
+                                ?>
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md md-layers"></i>Subcategory</a>
+                                    <ul class="submenu">
+                                        <li><a href="<?php echo base_url(); ?>Subcategoria_controller/vista_agregar_subcategoria">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Subcategoria_controller/listar_subcategorias">List</a></li>
+                                    </ul> 
 
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#"><i class="md  md-label"></i>Product</a>
-                                <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Productos_controller/vista_agregar_producto">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Productos_controller/mostrar_productos">List</a></li>
-                                </ul>         
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#"><i class="md  md-local-shipping"></i>Truck</a>
-                                <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Camion_controller/vista_agregar_camion">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Camion_controller/listar_camiones">List</a></li>
-                                </ul>         
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#"><i class="md  md-perm-contact-cal"></i>Driver</a>
-                                <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Chofer_controller/vista_agregar_chofer">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Chofer_controller/listar_chofer">List</a></li>
-                                </ul>         
-                            </li>
-                            <li class="has-submenu">
-                                <a href="#"><i class="md  md-folder"></i>Route</a>
-                                <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Ruta_controller/vista_agregar_ruta">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Ruta_controller/listar_rutas">List</a></li>
-                                </ul>         
-                            </li>
-
-                            <li class="has-submenu">
-                                <a href="#"><i class="md  md-assignment-late"></i>Orders</a>
-                                <ul class="submenu">
-                                    <li><a href="<?php echo base_url(); ?>Pedidos_controller/vista_agregar_pedido">Add</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Pedidos_controller/listar_pedidos_pendientes">List Order Pending</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Pedidos_controller/listar_pedidos_enviados">List Order Sent</a></li>
-                                </ul>         
-                            </li>
-
-                            <li class="">
-                                <a href="<?php echo base_url();?>Tienda_controller/tienda"><i class="md md-shopping-cart"></i>Store</a>
-                            </li>
-
-                            <li class="">
-                                <a href="<?php echo base_url();?>Contacto_controller/contacto"><i class="md md-account-child"></i>Contact</a>
-                            </li>
-                        
-                            <li class="">
-                                <a href="<?php echo base_url();?>Reportes_controller/listar_reportes"><i class="md md-description"></i>Reports</a>
-                            </li>
-                            
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1)) {
+                                ?>
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md  md-label"></i>Product</a>
+                                    <ul class="submenu">
+                                        <li><a href="<?php echo base_url(); ?>Productos_controller/vista_agregar_producto">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Productos_controller/mostrar_productos">List</a></li>
+                                    </ul>         
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1)) {
+                                ?>
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md  md-local-shipping"></i>Truck</a>
+                                    <ul class="submenu">
+                                        <li><a href="<?php echo base_url(); ?>Camion_controller/vista_agregar_camion">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Camion_controller/listar_camiones">List</a></li>
+                                    </ul>         
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1)) {
+                                ?>
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md  md-perm-contact-cal"></i>Driver</a>
+                                    <ul class="submenu">
+                                        <li><a href="<?php echo base_url(); ?>Chofer_controller/vista_agregar_chofer">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Chofer_controller/listar_chofer">List</a></li>
+                                    </ul>         
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1)) {
+                                ?>
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md  md-folder"></i>Route</a>
+                                    <ul class="submenu">
+                                        <li><a href="<?php echo base_url(); ?>Ruta_controller/vista_agregar_ruta">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Ruta_controller/listar_rutas">List</a></li>
+                                    </ul>         
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 3)) {
+                                ?>
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md  md-assignment-late"></i>Orders</a>
+                                    <ul class="submenu"  style="left: 0px !important;">
+                                        <li><a href="<?php echo base_url(); ?>Pedidos_controller/vista_agregar_pedido">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Pedidos_controller/listar_pedidos_pendientes">List Order Pending</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Pedidos_controller/listar_pedidos_enviados">List Order Sent</a></li>
+                                    </ul>         
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1) || ($this->session->userdata('rol_id') == 2) || ($this->session->userdata('rol_id') == 4)) {
+                                ?>
+                                <li class="has-submenu">
+                                    <a href="#"><i class="md  md-assignment-late"></i>Orders</a>
+                                    <ul class="submenu">
+                                        <li><a href="<?php echo base_url(); ?>Pedidos_controller/vista_agregar_pedido">Add</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Pedidos_controller/listar_pedidos_pendientes">List Order Pending</a></li>
+                                        <li><a href="<?php echo base_url(); ?>Pedidos_controller/listar_pedidos_enviados">List Order Sent</a></li>
+                                    </ul>         
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1) || ($this->session->userdata('rol_id') == 2) || ($this->session->userdata('rol_id') == 5)) {
+                                ?>
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>Tienda_controller/tienda"><i class="md md-shopping-cart"></i>Store</a>
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1) || ($this->session->userdata('rol_id') == 5)) {
+                                ?>
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>Contacto_controller/contacto"><i class="md md-account-child"></i>Contact</a>
+                                </li>
+                                <?php
+                            }
+                            if (($this->session->userdata('rol_id') == 1) || ($this->session->userdata('rol_id') == 2) || ($this->session->userdata('rol_id') == 4)) {
+                                ?>
+                                <li class="">
+                                    <a href="<?php echo base_url(); ?>Reportes_controller/listar_reportes"><i class="md md-description"></i>Reports</a>
+                                </li>
+                                <?php
+                            }
+                            ?>
                         </ul>
                         <!--End navigation menu-->
                     </div>
@@ -275,45 +347,45 @@
 
         <div class="wrapper">
             <div class="container">
-            <!--notification start-->
-             <div class="row" id="mensaje">
-                <div class="col-sm-12">
-                    <section class="notification flashMsg">
+                <!--notification start-->
+                <div class="row" id="mensaje">
+                    <div class="col-sm-12">
+                        <section class="notification flashMsg">
 
-                        <?php if ($this->session->flashdata('correcto')): ?>
-                            <div class="alert alert-success fade in">
-                                <h4 class="text-center">
-                                    <?php echo $this->session->flashdata('correcto') ?>
-                                </h4>
-                            </div>    
-                        <?php endif ?>
+                            <?php if ($this->session->flashdata('correcto')): ?>
+                                <div class="alert alert-success fade in">
+                                    <h4 class="text-center">
+                                        <?php echo $this->session->flashdata('correcto') ?>
+                                    </h4>
+                                </div>    
+                            <?php endif ?>
 
-                        <?php if ($this->session->flashdata('error')): ?>
-                            <div class="alert alert-danger fade in">
-                                <h4 class="text-center">
-                                    <?php echo $this->session->flashdata('error') ?>
-                                </h4>
-                            </div>  
-                        <?php endif ?>
+                            <?php if ($this->session->flashdata('error')): ?>
+                                <div class="alert alert-danger fade in">
+                                    <h4 class="text-center">
+                                        <?php echo $this->session->flashdata('error') ?>
+                                    </h4>
+                                </div>  
+                            <?php endif ?>
 
-                        <?php if ($this->session->flashdata('info')): ?>
-                            <div class="alert alert-info fade in">
-                                <h4 class="text-center">
-                                    <?php echo $this->session->flashdata('info') ?> 
-                                </h4>
-                            </div>  
-                        <?php endif ?>
+                            <?php if ($this->session->flashdata('info')): ?>
+                                <div class="alert alert-info fade in">
+                                    <h4 class="text-center">
+                                        <?php echo $this->session->flashdata('info') ?> 
+                                    </h4>
+                                </div>  
+                            <?php endif ?>
 
-                        <?php if ($this->session->flashdata('warning')): ?>
-                            <div class="alert alert-info fade in">
-                                <h4 class="text-center">
-                                    <?php echo $this->session->flashdata('info') ?> 
-                                </h4>
-                            </div>  
-                        <?php endif ?>  
-                                        
-                    </section>
+                            <?php if ($this->session->flashdata('warning')): ?>
+                                <div class="alert alert-info fade in">
+                                    <h4 class="text-center">
+                                        <?php echo $this->session->flashdata('info') ?> 
+                                    </h4>
+                                </div>  
+                            <?php endif ?>  
 
+                        </section>
+
+                    </div>
                 </div>
-            </div>
-          <!--notification end-->
+                <!--notification end-->

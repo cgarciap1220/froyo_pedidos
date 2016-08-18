@@ -11,7 +11,7 @@ class Login_controller extends CI_Controller {
 
 	function index()
 	{       
-	    $data['titulo'] = 'Froyo Sistem Order';
+	    $data['titulo'] = 'Froyo Orders System';
 		$this->load->view('login', $data);
 	}
 

@@ -170,7 +170,7 @@ class Usuario_controller extends CI_Controller
     //carga la vista de modificar usuarios y coloca el contenido del registro especifico 
     function vista_modificar_usuario()
     { 
-        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
+        if($this->session->userdata('correo') && (($this->session->userdata('rol_id') == 1)||($this->session->userdata('rol_id') == 2)||($this->session->userdata('rol_id') == 3)||($this->session->userdata('rol_id') == 4)||($this->session->userdata('rol_id') == 5))) {
             $info['titulo'] = "Update User";
             $id = $this->uri->segment(3); 
             $query = $this->Usuario_model->editar_usuario($id);
@@ -221,26 +221,37 @@ class Usuario_controller extends CI_Controller
                 }
             }
 
-
-    }
+     }
 
     function eliminar_usuario(){
-            $id = $this->uri->segment('3');
-            if (isset($id) && $id != '') {
-                $query = $this->Usuario_model->eliminar_usuario($id);
-
-                if (isset($query) && $query == TRUE) {
-                    $this->session->set_flashdata('correcto','Registry is successfully deleted ');
-                    redirect('Usuario_controller/listar_usuarios/','refresh');
-                }else{
-                    $this->session->set_flashdata('error','Registry is not eliminated');
-                    redirect('Usuario_controller/listar_usuarios/','refresh');
-                }
+        $id = $this->uri->segment('3');
+        if (isset($id) && $id != '') {
+            $query = $this->Usuario_model->eliminar_usuario($id);
+            if (isset($query) && $query == TRUE) {
+                $this->session->set_flashdata('correcto','Registry is successfully deleted ');
+                redirect('Usuario_controller/listar_usuarios/','refresh');
             }else{
-                $this->session->set_flashdata('error',' ');
+                $this->session->set_flashdata('error','Registry is not eliminated');
                 redirect('Usuario_controller/listar_usuarios/','refresh');
             }
-
-      
+        }else{
+            $this->session->set_flashdata('error',' ');
+            redirect('Usuario_controller/listar_usuarios/','refresh');
+        }
     }
+    
+    function listar_clientes()
+    {
+        if($this->session->userdata('correo') && (($this->session->userdata('rol_id') == 1)|| ($this->session->userdata('rol_id') == 2))) {
+            $info['titulo'] = "List Users";
+            $this->load->view('tema/header',$info);
+            $this->load->view('usuarios/listar_clientes');
+            $this->load->view('tema/footer');
+        }else{
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        }
+    }
+    
+    
 }
