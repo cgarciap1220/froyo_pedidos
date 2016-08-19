@@ -61,9 +61,35 @@ class Categoria_model extends CI_Model
     }
 
 
+    public function obtener_categorias_subcategorias($id)
+    {
+            $this->db->where('categoria_id',$id);
+            $query = $this->db->get('subcategoria');
+
+            if ($query->num_rows() > 0) {
+                return $query->result();
+            }else{
+                return FALSE;
+            }
+    }
+
+    public function obtener_categorias_productos($id)
+    {
+            $this->db->where('categoria_id',$id);
+            $query = $this->db->get('producto');
+
+            if ($query->num_rows() > 0) {
+                return $query->result();
+            }else{
+                return FALSE;
+            }
+    }
+
      public function eliminar_categoria($id)
     {
          $this->db->where('id_categoria',$id);
          return $this->db->delete('categoria');
     }
+
+
 }

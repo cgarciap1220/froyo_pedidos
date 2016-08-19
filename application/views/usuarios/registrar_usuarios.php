@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="state">Rol</label>
                             <select class="form-control" id="rol" name="rol">
-                                <option value="0">Select State</option>           
+                                <option value="0">Select role</option>           
                                 <option value="1">Administrator</option>
                                 <option value="2">Secretary</option>
                                 <option value="3">Wherehouse</option>

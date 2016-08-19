@@ -83,6 +83,7 @@ class Ruta_model extends CI_Model
         $query = $this->db->query($sql);
         return $query->result();
     }
+    
     function eliminar_ruta_ciudad($id)
     {
         $sql = "DELETE FROM ciudad_ruta
@@ -97,6 +98,7 @@ class Ruta_model extends CI_Model
         return $this->db->update('ruta',$data);
         
     }
+    
     function eliminar_ruta($id)
     {
         $this->db->where('id_ruta',$id);

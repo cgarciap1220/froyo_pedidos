@@ -87,18 +87,164 @@ class Camion_controller extends CI_Controller
     
     function vista_agregar_camion()
     { 
-        $info['titulo'] = "Add Truck";
-        $this->load->view('tema/header',$info);
-        $this->load->view('camion/insertar_camion');
-        $this->load->view('tema/footer');
+        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) 
+        {
+            $info['titulo'] = "Add Truck";
+            $data['ruta'] = $this->Camion_model->obtener_rutas();
+            $data['chofer'] = $this->Camion_model->obtener_chofer();
+            $this->load->view('tema/header',$info);
+            $this->load->view('camion/insertar_camion',$data);
+            $this->load->view('tema/footer');
+        }
+        else
+        {
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        } 
     }
     
+    function agregar_camion()
+    {
+        $marca = $this->security->xss_clean(strip_tags($this->input->post('marca')));
+        $modelo = $this->security->xss_clean(strip_tags($this->input->post('modelo')));
+        $placa = $this->security->xss_clean(strip_tags($this->input->post('placa')));
+        $rutas = $this->security->xss_clean($this->input->post('ruta'));
+        $choferes = $this->security->xss_clean($this->input->post('chofer'));
+        
+        if(($marca != "")&&($modelo != "")&&($placa != "")&&($rutas != "")&&($choferes != ""))
+        {
+            $data = array(
+                'marca'=>$marca,
+                'modelo'=>$modelo,
+                'placa'=>$placa
+            );
+            $query = $this->Camion_model->agregar_camion($data);
+            if (isset($query)) 
+            {
+                if ($query == FALSE) 
+                {
+                    $this->session->set_flashdata('error',' Existing Truck Please check');
+                    redirect('Camion_controller/vista_agregar_camion', 'refresh');
+                }
+                else
+                {
+                    $idcamion = $this->Camion_model->obtener_id_camion();
+                    for($i = 0;$i<count($rutas);$i++)
+                    {
+                        $camion_ruta = array('camion_id'=>$idcamion,
+                            'ruta_id'=>$rutas[$i]);
+                        $this->Camion_model->insertar_ruta_camion($camion_ruta);
+                    }
+                    for($i = 0;$i<count($choferes);$i++)
+                    {
+                        $camion_chofer = array('camion_id_camion'=>$idcamion,
+                            'chofer_id_chofer'=>$choferes[$i]);
+                        $this->Camion_model->insertar_chofer_camion($camion_chofer);
+                    }
+                    $this->session->set_flashdata('correcto',' Truck added successfully.');
+                    redirect('Camion_controller/vista_agregar_camion', 'refresh');
+                }
+            }
+        }
+        else{
+            $this->session->set_flashdata('correcto',' Empty input.');
+            redirect('Camion_controller/vista_agregar_camion', 'refresh');
+        }
+        
+    }
+            
     function vista_modificar_camion()
     { 
-        $info['titulo'] = "Update Truck";
-        $this->load->view('tema/header',$info);
-        $this->load->view('camion/modificar_camion');
-        $this->load->view('tema/footer');
+        if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) 
+        {
+            $info['titulo'] = "Update Truck";
+            $id = $this->uri->segment(3);
+            $data['ruta'] = $this->Camion_model->obtener_rutas();
+            $data['chofer'] = $this->Camion_model->obtener_chofer();
+            $data['camion'] = $this->Camion_model->obtener_camion_id($id);
+            $data['ruta_camion'] = $this->Camion_model->seleccionar_ruta_camion($id);
+            $data['chofer_camion'] = $this->Camion_model->seleccionar_chofer_camion($id);
+            $this->load->view('tema/header',$info);
+            $this->load->view('camion/modificar_camion',$data);
+            $this->load->view('tema/footer');
+        }
+        else
+        {
+            $this->session->set_flashdata('error','Login to access.');
+            redirect('Login_controller/index','refresh');
+        } 
     }
     
+    function actualizar_camion()
+    {
+        $id = $this->uri->segment(3);
+        $marca = $this->security->xss_clean(strip_tags($this->input->post('marca')));
+        $modelo = $this->security->xss_clean(strip_tags($this->input->post('modelo')));
+        $placa = $this->security->xss_clean(strip_tags($this->input->post('placa')));
+        $rutas = $this->security->xss_clean($this->input->post('ruta'));
+        $choferes = $this->security->xss_clean($this->input->post('chofer'));
+        
+        if(($marca != "")&&($modelo != "")&&($placa != "")&&($rutas != "")&&($choferes != ""))
+        {
+            $data = array(
+                'marca'=>$marca,
+                'modelo'=>$modelo,
+                'placa'=>$placa
+            );
+            
+            $query = $this->Camion_model->actualizar_camion($id,$data);
+            if (isset($query) && $query == TRUE)
+                {   
+                    $this->Camion_model->eliminar_ruta_camion($id);
+                    for($i = 0;$i<count($rutas);$i++)
+                    {
+                        $camion_ruta = array('camion_id'=>$id,
+                            'ruta_id'=>$rutas[$i]);
+                        $this->Camion_model->insertar_ruta_camion($camion_ruta);
+                    }
+                    $this->Camion_model->eliminar_chofer_camion($id);
+                    for($i = 0;$i<count($choferes);$i++)
+                    {
+                        $camion_chofer = array('camion_id_camion'=>$id,
+                            'chofer_id_chofer'=>$choferes[$i]);
+                        $this->Camion_model->insertar_chofer_camion($camion_chofer);
+                    }
+                    
+                    
+                    $this->session->set_flashdata('correcto','The truck is successfully updated');
+                    redirect('Camion_controller/vista_modificar_camion/'.$id,'refresh');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error','Failed to update , revice information');
+                    $this->vista_modificar_camion($id);
+                }
+        }
+        
+    }
+    
+    function eliminar_camion()
+    {
+        $id = $this->uri->segment('3');
+        if (isset($id) && $id != '') 
+        {
+            $query = $this->Camion_model->eliminar_camion($id);
+
+            if (isset($query) && $query == TRUE) 
+            {
+                $this->session->set_flashdata('correcto','Registry is successfully deleted ');
+                redirect('Camion_controller/listar_camiones/','refresh');
+            }
+            else
+            {
+                $this->session->set_flashdata('error','Registry is not eliminated');
+                redirect('Camion_controller/listar_camiones/','refresh');
+            }
+        }
+        else
+        {
+            $this->session->set_flashdata('error',' ');
+            redirect('Camion_controller/listar_camiones/','refresh');
+        }
+    }
 }

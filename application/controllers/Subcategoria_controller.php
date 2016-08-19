@@ -11,7 +11,7 @@ class Subcategoria_controller extends CI_Controller
     {
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
 
-            $query = $this->Subcategoria_model->obtener_categorias();
+            $query = $this->Subcategoria_model->seleccionar_categorias();
 
             $info['titulo'] = "Add Subcategory";
 
@@ -125,7 +125,7 @@ class Subcategoria_controller extends CI_Controller
     {
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
 
-            $query = $this->Subcategoria_model->obtener_categorias();
+            $query = $this->Subcategoria_model->seleccionar_categorias();
 
             $info['titulo'] = "Update Subcategory";
             $id = $this->uri->segment(3);

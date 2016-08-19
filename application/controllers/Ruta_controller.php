@@ -114,10 +114,10 @@ class Ruta_controller extends CI_Controller
         if(($ruta != "") && ($ciudades != ""))
         {
             $data = array('ruta'=>$ruta);
-            $insertar_ruta = $this->Ruta_model->insertar_ruta($data);
-            if (isset($insertar_ruta)) 
+            $query = $this->Ruta_model->insertar_ruta($data);
+            if (isset($query)) 
             {
-                if ($insertar_ruta == FALSE) 
+                if ($query == FALSE) 
                 {
                     $this->session->set_flashdata('error',' Existing route Please check');
                     redirect('Ruta_controller/vista_agregar_ruta', 'refresh');
@@ -138,7 +138,10 @@ class Ruta_controller extends CI_Controller
                 }
             }
         }
-        
+        else{
+            $this->session->set_flashdata('correcto',' Empty input.');
+            redirect('Ruta_controller/vista_agregar_ruta', 'refresh');
+        }
     }
             
     function vista_modificar_ruta()
@@ -195,7 +198,8 @@ class Ruta_controller extends CI_Controller
         
     }
     
-    function eliminar_ruta(){
+    function eliminar_ruta()
+    {
         $id = $this->uri->segment('3');
         if (isset($id) && $id != '') 
         {
@@ -212,7 +216,8 @@ class Ruta_controller extends CI_Controller
                 redirect('Ruta_controller/listar_rutas/','refresh');
             }
         }
-        else{
+        else
+        {
             $this->session->set_flashdata('error',' ');
             redirect('Ruta_controller/listar_rutas/','refresh');
         }

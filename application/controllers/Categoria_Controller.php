@@ -4,6 +4,7 @@ class Categoria_Controller extends CI_Controller
    public function __construct()
     {
         parent::__construct();
+        $this->load->model('Subcategoria_model');
         $this->load->model('Categoria_model');
     }
      //Carga la vista de instertar categoria y da parametros de seguridad.
@@ -166,17 +167,38 @@ class Categoria_Controller extends CI_Controller
 
 
     function eliminar_categoria(){
+        
         $id = $this->uri->segment('3');
-        if (isset($id) && $id != '') {
-            $query = $this->Categoria_model->eliminar_categoria($id);
 
-            if (isset($query) && $query == TRUE) {
-                $this->session->set_flashdata('correcto','Registry is successfully deleted ');
-                redirect('Categoria_controller/listar_categorias/','refresh');
+        if (isset($id) && $id != '') {
+
+        $categoria = $this->Categoria_model->obtener_categorias_subcategorias($id);
+
+            if(isset($categoria) && $categoria == FALSE){
+                
+                $categoria = $this->Categoria_model->obtener_categorias_productos($id);
+
+                if(isset($categoria) && $categoria == FALSE){
+
+                    $query = $this->Categoria_model->eliminar_categoria($id);
+
+                    if (isset($query) && $query == TRUE) {
+                        $this->session->set_flashdata('correcto','Registry is successfully deleted ');
+                        redirect('Categoria_controller/listar_categorias/','refresh');
+                    }else{
+                        $this->session->set_flashdata('error','Registry is not eliminated');
+                        redirect('Categoria_controller/listar_categorias/','refresh');
+                    }
+                   
+                }else{
+                    $this->session->set_flashdata('error','You can not delete this category , there are associated products , first delete products.');
+                    redirect('Categoria_controller/listar_categorias/','refresh');
+                }
             }else{
-                $this->session->set_flashdata('error','Registry is not eliminated');
+                $this->session->set_flashdata('error','You can not delete this category,there are associated subcategories, first delete subcategories');
                 redirect('Categoria_controller/listar_categorias/','refresh');
             }
+
         }else{
             $this->session->set_flashdata('error',' ');
             redirect('Categoria_controller/listar_categorias/','refresh');

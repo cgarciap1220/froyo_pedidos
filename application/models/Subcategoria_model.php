@@ -6,6 +6,18 @@ class Subcategoria_model extends CI_Model
         parent::__construct();
     }
 
+   
+    function seleccionar_categorias()
+    {
+        $this->db->order_by('categoria','asc');
+        $query = $this->db->get('categoria');
+        if( $query->num_rows() > 0){
+            return $query->result();
+        }
+        else{
+            return FALSE;
+        }
+    }
     function obtener_categorias($limit,$offset)
     {
         $this->db->order_by('categoria','asc');

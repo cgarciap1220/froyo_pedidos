@@ -25,7 +25,7 @@
                         <!--nombre_producto-->
                         <div class="form-group">
                             <label for="state">Model truck</label>
-                            <input name="peso" type="text" id="peso" class="form-control" placeholder="Enter the model truck" required="" title="You need rewrite the model truck" />
+                            <input name="modelo" type="text" id="modelo" class="form-control" placeholder="Enter the model truck" required="" title="You need rewrite the model truck" />
                         </div>
                         <div class="form-group">
                             <label for="state">Licence plate</label>
@@ -33,10 +33,24 @@
                         </div>
                         <div class="form-group">
                             <label for="ruta">Truck routes</label>
-                            <select class="form-control" id="ruta" name="ruta[]" multiple="">
-                                
+                           <select class="selectpicker form-control" multiple="" id="ruta" name="ruta[]" data-style="btn-white">
+                               
+                                <?php foreach ($ruta as $rut): ?>
+                                    <option value="<?php echo $rut->id_ruta ?>">
+                                        <?php echo $rut->ruta ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
-                            
+                        </div>
+                        <div class="form-group">
+                            <label for="ruta">Truck routes</label>
+                           <select class="selectpicker form-control" multiple="" id="chofer" name="chofer[]" data-style="btn-white">
+                                <?php foreach ($chofer as $chof): ?>
+                                    <option value="<?php echo $chof->id_chofer ?>">
+                                        <?php echo $chof->nombre ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <!--campo seguridad-->
                         <input type="hidden" name="login" value="ok">
