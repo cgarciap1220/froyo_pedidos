@@ -27,6 +27,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
         <link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>assets/plugins/magnific-popup/dist/magnific-popup.css"/>
+    
+        <!-- Bootstrap-select css-->
+        <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
 
         <script src="<?php echo base_url(); ?>assets/js/modernizr.min.js"></script>
 

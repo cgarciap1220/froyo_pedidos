@@ -65,6 +65,9 @@
 <script src="<?php echo base_url(); ?>assets/plugins/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/pages/jquery.sweet-alert.init.js"></script>
 
+<!-- Bootstrap-select  -->
+        <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-select/dist/js/bootstrap-select.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
         $('.counter').counterUp({

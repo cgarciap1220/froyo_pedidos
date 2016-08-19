@@ -33,7 +33,7 @@
                                             </a>
                                         </td>
                                         <td class="text-center">
-                                            <a href="javascript:eliminar('<?php echo base_url();?>Ruta_controller/eliminar_camion/<?php echo $key->id_ruta?>')">
+                                            <a href="javascript:eliminar('<?php echo base_url();?>Ruta_controller/eliminar_ruta/<?php echo $key->id_ruta?>')">
                                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                             </a>
                                         </td>

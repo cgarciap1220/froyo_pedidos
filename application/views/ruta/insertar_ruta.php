@@ -6,7 +6,7 @@
             <li role="presentation" class="active"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Route</a></li>
         </ul>
         <!-- inicio formulario -->
-        <form action="<?php echo base_url() ?>Camion_controller/agregar_camion" method="POST">
+        <form action="<?php echo base_url() ?>Ruta_controller/agregar_ruta" method="POST">
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="category">
@@ -25,12 +25,19 @@
                         <!--nombre_producto-->
                         <div class="form-group">
                             <label for="ciudad">Cities of the route</label>
-                            <select class="form-control" id="ciudad" name="ciudad[]" multiple="">
-                                
+                            <!--<select class="form-control" id="ciudad" name="ciudad[]" multiple="">
+
+                            </select>-->
+                            <select class="selectpicker form-control" multiple="" id="ciudad" name="ciudad[]" data-style="btn-white">
+                                <?php foreach ($ciudad as $ciudad): ?>
+                                    <option value="<?php echo $ciudad->id_ciudad ?>">
+                                        <?php echo $ciudad->nombre ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                             
                         </div>
-                        
+
                         <!--campo seguridad-->
                         <input type="hidden" name="login" value="ok">
                         <!--boton registrarse-->

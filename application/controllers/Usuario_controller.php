@@ -6,6 +6,7 @@ class Usuario_controller extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Usuario_model');
+        $this->load->model('Ciudad_model');
     }
     
     //carga la vista solo si existen las variables de sesion 
@@ -13,7 +14,7 @@ class Usuario_controller extends CI_Controller
     { 
         if($this->session->userdata('correo') && ($this->session->userdata('rol_id') == 1)) {
             $info['titulo'] = "Add User";
-            $data['ciudad'] = $this->Usuario_model->obtener_ciudades();
+            $data['ciudad'] = $this->Ciudad_model->obtener_ciudades();
             $this->load->view('tema/header',$info);
             $this->load->view('usuarios/registrar_usuarios',$data);
             $this->load->view('tema/footer');
@@ -174,7 +175,7 @@ class Usuario_controller extends CI_Controller
             $info['titulo'] = "Update User";
             $id = $this->uri->segment(3); 
             $query = $this->Usuario_model->editar_usuario($id);
-            $data['ciudad'] = $this->Usuario_model->obtener_ciudades();
+            $data['ciudad'] = $this->Ciudad_model->obtener_ciudades();
             if (isset($query)) {
                 if ($query != FALSE) {
                     $data['query'] = $query;

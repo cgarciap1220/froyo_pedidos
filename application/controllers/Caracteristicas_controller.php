@@ -42,17 +42,17 @@ class Caracteristicas_controller extends CI_Controller{
     
     function agregar_producto_caracteristicas()
     {
-        $confirmacion = $this->input->post('confirmacion');
-        $codigo_producto = $this->input->post('codigo_producto');
-        $codigo_especifico = $this->input->post('codigo_especifico');
-        $ancho = $this->input->post('ancho');
-        $alto = $this->input->post('alto');
-        $largo = $this->input->post('largo');
-        $tamanno = $this->input->post('tamanno');
-        $existencia = $this->input->post('existencia');
-        $precio = $this->input->post('precio');
-        $color = $this->input->post('color');
-        $sabor = $this->input->post('sabor');
+        $confirmacion = $this->security->xss_clean(strip_tags($this->input->post('confirmacion')));
+        $codigo_producto = $this->security->xss_clean(strip_tags($this->input->post('codigo_producto')));
+        $codigo_especifico = $this->security->xss_clean(strip_tags($this->input->post('codigo_especifico')));
+        $ancho = $this->security->xss_clean(strip_tags($this->input->post('ancho')));
+        $alto = $this->security->xss_clean(strip_tags($this->input->post('alto')));
+        $largo = $this->security->xss_clean(strip_tags($this->input->post('largo')));
+        $tamanno = $this->security->xss_clean(strip_tags($this->input->post('tamanno')));
+        $existencia = $this->security->xss_clean(strip_tags($this->input->post('existencia')));
+        $precio = $this->security->xss_clean(strip_tags($this->input->post('precio')));
+        $color = $this->security->xss_clean(strip_tags($this->input->post('color')));
+        $sabor = $this->security->xss_clean(strip_tags($this->input->post('sabor')));
         
         if($existencia == "Select Existence")
         {

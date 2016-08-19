@@ -128,19 +128,26 @@ function confirmCaracteristicas()
     if (isConfirm) {
        // alert(isConfirm);
         //var confirm = document.getElementById("codigo_producto").value;
-        var obj = {
+        /*var obj = {
         confirm: isConfirm
 
         };
-        sessionStorage.setItem('confirmacion', JSON.stringify(obj));
+        sessionStorage.setItem('confirmacion', JSON.stringify(obj));*/
        
          swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                 
     } else {
-       var obj = {
+       /*var obj = {
         confirm: isConfirm
 
         };
-        sessionStorage.setItem('confirmacion', JSON.stringify(obj));
+        sessionStorage.setItem('confirmacion', JSON.stringify(obj));*/
+        $.ajax({
+            url: "<?php echo base_url(); ?>" + "/caracteristicas_controller/agregar_producto_caracteristicas/"+isConfirm,
+            //url: "obtener_municipio_dpto/" + dptoId,
+            type: "POST"
+ 
+ });  
       swal("Cancelled", "Your imaginary file is safe :)", "error");
     }
   });
@@ -179,10 +186,11 @@ function confirmCaracteristicas()
  }
  }*/
 
-function loadConfirmacion() {
+/*function loadConfirmacion() {
  var confirmacion = JSON.parse(sessionStorage.confirmacion);
  if (confirmacion != null) {
  document.getElementById("confirmacion").value = confirmacion.confirm;
  sessionStorage.setItem('confirmacion', null);
  }
- }
+ }*/
+
